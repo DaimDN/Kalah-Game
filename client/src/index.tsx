@@ -1,15 +1,14 @@
-import React from 'react'
+import React, {FC, Fragment} from 'react'
 import ReactDOM from 'react-dom'
 
-export default function Index() {
+const App: FC = ()=>{
     return (
-        <div>
-            <h1> welcome</h1>
-            
-        </div>
+        <Fragment>
+         
+        </Fragment>
     )
 }
 
-ReactDOM.render(<Index/>, document.getElementById('root'));
+ReactDOM.render(<App/>, document.getElementById('root'));
 
 
