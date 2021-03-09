@@ -3,6 +3,7 @@ import {api} from '../util/api'
 import { BrowserRouter as Router, Switch, Route, Link} from "react-router-dom";
 import {Home} from '../pages/Home'
 import {Navbar} from '../components/Navbar'
+import {Games} from '../pages/Game'
 
 
 export const Routing: FC = ()=> {
@@ -27,6 +28,7 @@ export const Routing: FC = ()=> {
           <Navbar/>                
           <Switch>
             <Route exact path="/" component={Home}/>
+            <Route path="/start" component={Games}/>
             <Route path={path} component={Error} />           
           </Switch>
         </Fragment>
