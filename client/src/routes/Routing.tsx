@@ -1,30 +1,47 @@
-import React, {Fragment, FC} from 'react'
+import React, {Fragment, FC, useEffect, useState} from 'react'
+import {api} from '../util/api'
 import { BrowserRouter as Router, Switch, Route, Link} from "react-router-dom";
 import {Home} from '../pages/Home'
+import {Navbar} from '../components/Navbar'
 
 
 export const Routing: FC = ()=> {
+  const [path, setPath] : any = useState(undefined);
+  const fetch =  async (): Promise<void> =>{
+      try {
+          let fetch = await api.get('/default')
+          fetch = fetch.data;    
+          setPath(fetch)
+      } catch (error) {
+          throw error;
+          setPath("*");                
+      }
+  }
+  useEffect(()=>{
+      fetch();      
+}, []);
+
     return (
         <Router>
-        <div>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            
-          </ul>
-  
-          <hr />
-  
-         
+        <Fragment>
+          <Navbar/>                
           <Switch>
-            <Route exact path="/">
-              <Home />
-            </Route>            
+            <Route exact path="/" component={Home}/>
+            <Route path={path} component={Error} />           
           </Switch>
-        </div>
-      </Router>
-    
+        </Fragment>
+      </Router>    
     )
 }
 
+
+const Error = ()=> {
+  return (
+    <Fragment>
+          <div className="text-center mx-auto">
+            <h1 className="display-3">404 - Resource unavailable</h1>
+          </div>      
+    </Fragment>
+  )
+
+}

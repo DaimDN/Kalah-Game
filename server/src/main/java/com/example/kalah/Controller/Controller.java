@@ -19,5 +19,11 @@ public class Controller {
         return landingPage;
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping("/default")
+    public String landing() {
+        return "*";
+    }
 
 }

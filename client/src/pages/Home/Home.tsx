@@ -17,8 +17,6 @@ export const Home : FC =  ()=> {
         useEffect(()=>{
             fetch();      
     }, []);
-
-
     return (
       <Container>
           <Fragment>
@@ -34,13 +32,10 @@ export const Home : FC =  ()=> {
       </Container>
     )
 }
-
-
 const Container = styled.div `
 width: 95%;
 margin: auto;
 `
-
 const Heading = styled.h1 `
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 font-family: 'Poppins', sans-serif;
