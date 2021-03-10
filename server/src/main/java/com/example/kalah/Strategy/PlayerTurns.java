@@ -5,9 +5,12 @@ import lombok.NoArgsConstructor;
 
 
 public enum PlayerTurns {
-    PlayerA ("A"), PlayerB ("B");
+    PlayerOne ("A"), Playertwo ("B");
 
     private String whoseTurn;
+
+    PlayerTurns(String a) {
+    }
 
     public String getWhoseTurn() {
         return whoseTurn;

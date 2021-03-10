@@ -25,7 +25,7 @@ public class BoardService implements BoardApi {
         return strategy;
     }
 
-    @Cacheable(value = "kalahGames", key = "#id" , unless = "#result  == null")
+    @Cacheable(value = "KalahBoard", key = "#id" , unless = "#result  == null")
     public Strategy loadGame (String id)  {
         Optional<Strategy> Found = boardRepository.findById(id);
 
@@ -35,9 +35,8 @@ public class BoardService implements BoardApi {
         return Found.get();
     }
 
-    @CachePut(value = "kalahGames", key = "#kalahaGame.id")
     public Strategy updateGame (Strategy board){
-        board = boardRepository.save(board);
+        boardRepository.save(board);
         return board;
     }
 }

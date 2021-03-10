@@ -20,7 +20,7 @@ import static com.example.kalah.Strategy.GameDefault.*;
 @Getter
 public class Strategy implements Serializable {
     @Id
-    private String GameId;
+    private String gameId;
     private List<KalahHouse> KalahHouse;
     private PlayerTurns Player;
 
@@ -32,9 +32,9 @@ public class Strategy implements Serializable {
         this (defaultSeed);
     }
 
-    public Strategy(String GameId, Integer pitStones) {
+    public Strategy(String gameId, Integer pitStones) {
         this (pitStones);
-        this.GameId = GameId;
+        this.gameId = gameId;
     }
 
     public Strategy(int Seeds) {

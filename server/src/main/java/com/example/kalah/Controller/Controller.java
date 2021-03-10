@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class Controller {
 
+    private Integer Seeds = 4;
     //Adding Services
     @Autowired
     private BoardService boardService;
@@ -41,9 +42,6 @@ public class Controller {
     }
 
 
-    @Value("4")
-    private Integer Seeds;
-
 
     @GetMapping("{BoardId}")
     @ApiOperation(value = "",
@@ -51,14 +49,14 @@ public class Controller {
     public ResponseEntity<Strategy> BoardStatus(
             @ApiParam(value = "",
                     required = true)
-            @PathVariable(value = "id") String gameId) throws Exception {
+            @PathVariable(value = "BoardId") String gameId) throws Exception {
 
         return ResponseEntity.ok(boardService.loadGame(gameId));
     }
 
 
     @PostMapping
-    @ApiOperation(value = "", produces = "Application/JSON", response = Strategy.class, httpMethod = "POST")
+    @ApiOperation( value = "", produces = "application/json", response = Strategy.class, httpMethod = "POST")
     public ResponseEntity<Strategy> CreateBoard() throws Exception {
 
         Strategy board = boardService.newBoard(Seeds);

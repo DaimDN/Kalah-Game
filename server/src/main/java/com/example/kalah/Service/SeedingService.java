@@ -21,13 +21,13 @@ public class SeedingService implements SeedingApi {
 
         if (board.getPlayer() == null) {
             if (SeedIndex < GameDefault.RightKalahIndex)
-                board.setPlayer(PlayerTurns.PlayerA);
+                board.setPlayer(PlayerTurns.PlayerOne);
             else
-                board.setPlayer(PlayerTurns.PlayerB);
+                board.setPlayer(PlayerTurns.Playertwo);
         }
 
-        if (board.getPlayer() == PlayerTurns.PlayerA && SeedIndex > GameDefault.RightKalahIndex ||
-                board.getPlayer() == PlayerTurns.PlayerB && SeedIndex < GameDefault.RightKalahIndex)
+        if (board.getPlayer() == PlayerTurns.PlayerOne && SeedIndex > GameDefault.RightKalahIndex ||
+                board.getPlayer() == PlayerTurns.Playertwo && SeedIndex < GameDefault.RightKalahIndex)
             return board;
 
         KalahHouse house = board.getHouse(SeedIndex);
@@ -60,8 +60,8 @@ public class SeedingService implements SeedingApi {
 
         PlayerTurns Turn = board.getPlayer();
 
-        if ((currentPosition == GameDefault.RightKalahIndex && Turn == PlayerTurns.PlayerB) ||
-                (currentPosition == GameDefault.LeftKalahIndex && Turn == PlayerTurns.PlayerA)) {
+        if ((currentPosition == GameDefault.RightKalahIndex && Turn == PlayerTurns.PlayerOne) ||
+                (currentPosition == GameDefault.LeftKalahIndex && Turn == PlayerTurns.Playertwo)) {
             currentPosition = currentPosition % GameDefault.totalHouses + 1;
         }
         board.setCurrentHousePosition(currentPosition);
@@ -86,8 +86,8 @@ public class SeedingService implements SeedingApi {
     }
 
     public PlayerTurns Turns(PlayerTurns now) {
-        if (now  == PlayerTurns.PlayerA)
-            return PlayerTurns.PlayerB;
-        return PlayerTurns.PlayerA;
+        if (now  == PlayerTurns.PlayerOne)
+            return PlayerTurns.Playertwo;
+        return PlayerTurns.PlayerOne;
     }
 }

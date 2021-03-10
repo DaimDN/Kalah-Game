@@ -14,7 +14,7 @@ import java.io.Serializable;
 
 public class KalahHouse implements Serializable {
 
-    private Integer GameId;
+    private Integer gameId;
     private Integer Seeds;
 
     public KalahHouse(int rightKalahIndex) {
@@ -40,7 +40,7 @@ public class KalahHouse implements Serializable {
 
     @Override
     public String toString() {
-        String Id = GameId.toString();
+        String Id = gameId.toString();
         String Seeded = Seeds.toString();
 
         return Id +
