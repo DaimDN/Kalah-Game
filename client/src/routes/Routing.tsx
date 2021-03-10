@@ -27,15 +27,13 @@ export const Routing: FC = ()=> {
   useEffect(()=>{
       fetch();      
 }, []);
-
-
-
 if(!serverStatus){
-
-  return(    
+  return(   
+    <Fragment> 
     <div className="text-center" >
     <h1 className="display-1">503 - Server Error</h1>
     </div>
+    </Fragment>
 )  
 }
 
