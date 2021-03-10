@@ -17,6 +17,10 @@ public class KalahHouse implements Serializable {
     private Integer GameId;
     private Integer Seeds;
 
+    public KalahHouse(int rightKalahIndex) {
+     this.Seeds = rightKalahIndex;
+    }
+
     public void EmptyHouse (){
         this.Seeds = 0;
     }
@@ -30,7 +34,7 @@ public class KalahHouse implements Serializable {
         return this.Seeds == 0;
     }
 
-    public void fillSeed (Integer Seed){
+    public void addSeed (Integer Seed){
         this.Seeds+= Seed;
     }
 

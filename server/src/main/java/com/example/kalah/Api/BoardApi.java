@@ -1,4 +1,8 @@
 package com.example.kalah.Api;
 
-public class BoardApi {
+
+import com.example.kalah.Strategy.Strategy;
+
+public interface BoardApi {
+    Strategy newBoard(int Seeds);
 }
