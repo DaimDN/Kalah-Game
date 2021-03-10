@@ -3,6 +3,7 @@ package com.example.kalah.Controller;
 
 import com.example.kalah.Service.BoardService;
 import com.example.kalah.Service.SeedingService;
+import com.example.kalah.Strategy.GameDefault;
 import com.example.kalah.Strategy.Strategy;
 import com.example.kalah.model.LandingPage;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -16,7 +17,6 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class Controller {
-
 
     //Adding Services
     @Autowired
@@ -45,7 +45,7 @@ public class Controller {
     private Integer Seeds;
 
 
-    @GetMapping("{Boardid}")
+    @GetMapping("{BoardId}")
     @ApiOperation(value = "",
             produces = "Application/JSON", response = Strategy.class, httpMethod = "GET")
     public ResponseEntity<Strategy> BoardStatus(
@@ -62,6 +62,22 @@ public class Controller {
     public ResponseEntity<Strategy> CreateBoard() throws Exception {
 
         Strategy board = boardService.newBoard(Seeds);
+        boardService.updateGame(board);
+        return ResponseEntity.ok(board);
+    }
+
+
+    @PutMapping(value = "{BoardId}/houses/{houseId}")
+    @ApiOperation(value = "",
+            produces = "Application/JSON", response = Strategy.class, httpMethod = "PUT")
+    public ResponseEntity<Strategy> PopulateBoard(
+            @ApiParam(value = "", required = true)
+            @PathVariable(value = "BoardId") String gameId,
+            @PathVariable(value = "houseId") Integer houseId) throws Exception {
+
+        Strategy board = boardService.loadGame(gameId);
+
+        board = seedingService.seed(board, houseId);
         boardService.updateGame(board);
         return ResponseEntity.ok(board);
     }

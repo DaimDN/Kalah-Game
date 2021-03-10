@@ -1,5 +1,9 @@
 package com.example.kalah.Strategy;
 
+
+import lombok.NoArgsConstructor;
+
+
 public enum PlayerTurns {
     PlayerA ("A"), PlayerB ("B");
 
