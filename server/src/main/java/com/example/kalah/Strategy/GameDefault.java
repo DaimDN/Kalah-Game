@@ -3,11 +3,12 @@ package com.example.kalah.Strategy;
 public class GameDefault {
 
     public static final int
-            LeftStoreid = 14,
-            totalPockets = 14,
-            RightStoreid = 7;
+            LeftKalahIndex = 14,
+            RightKalahIndex = 7;
 
     public static final int  emptySeed =0;
+
+    public static final int  totalHouses = 14;
     public static final int defaultSeed = 4;
 
     public static final int
