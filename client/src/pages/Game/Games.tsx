@@ -5,36 +5,42 @@ export const Games: FC = ()=> {
     return (
         <Fragment>
         <Container>
-        <div className="text-center">
-            <h1 className="display-3">Kalah Game</h1>
-        </div>
-        <br/>
         <InnerContainer> 
         <div className="text-center"> 
 
             <div className="row">
-                <div className="col-2"><br/><br/><br/><Playdot cup >10</Playdot></div>
+                <div className="col-2"><Playdot cup >0</Playdot></div>
                 <div className="col-8">
                 <div className="row">
-                <div className="col-2"><Playdot>10</Playdot></div>
-                <div className="col-2"><Playdot>10</Playdot></div>
-                <div className="col-2"><Playdot>10</Playdot></div>
-                <div className="col-2"><Playdot>10</Playdot></div>
-                <div className="col-2"><Playdot>10</Playdot></div>
-                <div className="col-2"><Playdot>10</Playdot></div>
+                <div className="text-center">
+                    <h1 className="display-4">Computer</h1>
+                    <br/>
+                </div>
+                
+                <div className="col-2"><Playdot>4</Playdot></div>
+                <div className="col-2"><Playdot>4</Playdot></div>
+                <div className="col-2"><Playdot>4</Playdot></div>
+                <div className="col-2"><Playdot>4</Playdot></div>
+                <div className="col-2"><Playdot>4</Playdot></div>
+                <div className="col-2"><Playdot>4</Playdot></div>
                 </div>
                 <br/>
                 <br/>
                 <div className="row">
-                <div className="col-2"><Playdot>10</Playdot></div>
-                <div className="col-2"><Playdot>10</Playdot></div>
-                <div className="col-2"><Playdot>10</Playdot></div>
-                <div className="col-2"><Playdot>10</Playdot></div>
-                <div className="col-2"><Playdot>10</Playdot></div>
-                <div className="col-2"><Playdot>10</Playdot></div>
+                <div className="col-2"><Playdot>4</Playdot></div>
+                <div className="col-2"><Playdot>4</Playdot></div>
+                <div className="col-2"><Playdot>4</Playdot></div>
+                <div className="col-2"><Playdot>4</Playdot></div>
+                <div className="col-2"><Playdot>4</Playdot></div>
+                <div className="col-2"><Playdot>4</Playdot></div>
+               
+                <div className="text-center">
+                <br/>
+                    <h1 className="display-4">You</h1>
                 </div>
                 </div>
-                <div className="col-2"><br/><br/><br/><Playdot cup>10</Playdot></div>
+                </div>
+                <div className="col-2 text-left"><Playdot cup>0</Playdot></div>
                 
             </div>
         </div>
@@ -46,30 +52,29 @@ export const Games: FC = ()=> {
 
 
 const Playdot: any  =  styled.div <{cup: boolean}>`
-height: 80px;
-width: 80px;
+height: 14vh;
+width: 7vw;
 border-radius: 50%;
 background-color: red;
 color: white;
 font-size: 22px;
 text-align: center;
 padding-top: 23px;
+
 ${props => props.cup && css`
     background-color: #ff9800  ;
     color: white;
     font-size: 24px;
-    height: 90px;
-    width: 100px;
+    height: 15vh;
+    width: 8vw;
     border-radius: 10px;
-    margin: 0px 20px;
-    
+    margin: 0px 40px;  
+    margin-top: 170px;  
 `}
-
-
 `
 
 const InnerContainer = styled.div `
-width: 70%;
+width: 80%;
 margin: auto;
 
 `
