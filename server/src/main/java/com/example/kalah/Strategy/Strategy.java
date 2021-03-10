@@ -19,10 +19,10 @@ import static com.example.kalah.Strategy.GameDefault.*;
 @Setter
 @Getter
 public class Strategy implements Serializable {
-
     @Id
     private String GameId;
     private List<KalahHouse> KalahHouse;
+    private PlayerTurns Player;
 
     @JsonIgnore
     private int currentHousePosition;
@@ -55,7 +55,6 @@ public class Strategy implements Serializable {
         this.KalahHouse = Arrays.asList(FHPA, SHPA, THPA, FRHPA, FFHPA, SIXTHHPA, RightHouse, FHPB, SHPB, THPB, FRHPB, FFHPB, SIXTHHPB, LeftHouse);
 
     }
-
     public KalahHouse getHouse(Integer HouseIndex) {
             return this.KalahHouse.get(HouseIndex-1);
     }
@@ -64,14 +63,8 @@ public class Strategy implements Serializable {
     public String toString() {
         return "Board{" +
                 ", pits=" + KalahHouse +
-
+                ", playerTurn=" + Player +
                 '}';
     }
-
-
-
-
-
-
 
 }

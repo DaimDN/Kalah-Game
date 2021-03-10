@@ -1,15 +1,29 @@
 package com.example.kalah.Controller;
 
 
+import com.example.kalah.Service.BoardService;
+import com.example.kalah.Service.SeedingService;
+import com.example.kalah.Strategy.Strategy;
 import com.example.kalah.model.LandingPage;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class Controller {
+
+
+    //Adding Services
+    @Autowired
+    private BoardService boardService;
+
+    @Autowired
+    private SeedingService seedingService;
 
     @CrossOrigin(origins = "http://localhost:3000")
     @ResponseStatus(HttpStatus.OK)
@@ -24,6 +38,32 @@ public class Controller {
     @GetMapping("/default")
     public String landing() {
         return "*";
+    }
+
+
+    @Value("4")
+    private Integer Seeds;
+
+
+    @GetMapping("{Boardid}")
+    @ApiOperation(value = "",
+            produces = "Application/JSON", response = Strategy.class, httpMethod = "GET")
+    public ResponseEntity<Strategy> BoardStatus(
+            @ApiParam(value = "",
+                    required = true)
+            @PathVariable(value = "id") String gameId) throws Exception {
+
+        return ResponseEntity.ok(boardService.loadGame(gameId));
+    }
+
+
+    @PostMapping
+    @ApiOperation(value = "", produces = "Application/JSON", response = Strategy.class, httpMethod = "POST")
+    public ResponseEntity<Strategy> CreateBoard() throws Exception {
+
+        Strategy board = boardService.newBoard(Seeds);
+        boardService.updateGame(board);
+        return ResponseEntity.ok(board);
     }
 
 }
