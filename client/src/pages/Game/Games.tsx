@@ -68,7 +68,6 @@ export const Games: FC = ()=> {
            if(gameBoard != undefined){
             var BoardID : any = gameBoard            
             BoardID = BoardID.gameId;
-            console.log(positionvariant);
             var BaseURL = "/" + BoardID + "/houses/" + positionvariant;
            await api.put(BaseURL);
            window.location.reload();   
@@ -85,7 +84,11 @@ export const Games: FC = ()=> {
        const BoardId = Board.gameId;
        var KalahHouse : any = Board.kalahHouse;
        var PlayerOneBoard = KalahHouse.slice(0, 6);
-       var PlayerTwoBoard = KalahHouse.slice(7, 13);
+       var PlayerTwoBoard = KalahHouse.slice(7, 13).reverse();
+
+       var PlayerTwoBoardTwo = PlayerOneBoard.reverse();
+       var PlayerOneBoardTwo = PlayerTwoBoard.reverse();
+       
 
        console.log(KalahHouse)
         console.log({"playerOne": PlayerOneBoard})
@@ -103,7 +106,7 @@ export const Games: FC = ()=> {
             </div>
 
             <div className="row">
-                <div className="col-2"><HouseDeck cup > Player 2 <br/>{KalahHouse[6].seeds}</HouseDeck></div>
+                <div className="col-2"><HouseDeck cup > Player 2 <br/>{KalahHouse[13].seeds}</HouseDeck></div>
                 <div className="col-8">
                 <div className="row">
                 <div className="text-center">
@@ -111,7 +114,7 @@ export const Games: FC = ()=> {
                     <br/>
                 </div>
 
-                {PlayerTwoBoard.map((Item : any, index : any)=>{
+                {PlayerOneBoardTwo.reverse().map((Item : any, index : any)=>{
                     return <div className="col-2" key={index}><Playdot two>{Item.seeds}</Playdot></div>
                 })}
                 
@@ -119,7 +122,7 @@ export const Games: FC = ()=> {
                 <br/>
                 <br/>
                 <div className="row">
-                 {PlayerOneBoard.map((Item : any, index : any)=>{
+                 {PlayerTwoBoardTwo.reverse().map((Item : any, index : any)=>{
                     return <div className="col-2" key={index}>
                     {Item.seeds == 0 ? 
                     <Unplayeddot onClick={()=>{ZeroCheck(Item.seeds)}} cup>{Item.seeds}</Unplayeddot>                    
@@ -135,7 +138,7 @@ export const Games: FC = ()=> {
                 </div>
                 </div>
                 </div>
-                <div className="col-2 text-left"><HouseDeck>Your <br/>{KalahHouse[13].seeds}</HouseDeck></div>
+                <div className="col-2 text-left"><HouseDeck>Player 1 <br/>{KalahHouse[6].seeds}</HouseDeck></div>
                 
             </div>
         </div>
@@ -165,7 +168,7 @@ export const Games: FC = ()=> {
             </div>
 
             <div className="row">
-                <div className="col-2"><HouseDeck cup > Player 2 <br/>{KalahHouse[6].seeds}</HouseDeck></div>
+                <div className="col-2"><HouseDeck cup > Player 2 <br/>{KalahHouse[13].seeds}</HouseDeck></div>
                 <div className="col-8">
                 <div className="row">
                 <div className="text-center">
@@ -173,7 +176,7 @@ export const Games: FC = ()=> {
                     <br/>
                 </div>
 
-                {PlayerTwoBoard.map((Item : any, index : any)=>{
+                {PlayerTwoBoard.reverse().map((Item : any, index : any)=>{
                     return <div className="col-2" key={index}>
                     {Item.seeds == 0 ? 
                     <Unplayeddot onClick={()=>{ZeroCheck(Item.seeds)}} cup>{Item.seeds}</Unplayeddot>                    
@@ -188,7 +191,7 @@ export const Games: FC = ()=> {
                 <br/>
                 <br/>
                 <div className="row">
-                 {PlayerOneBoard.map((Item : any, index : any)=>{
+                 {PlayerOneBoard.reverse().map((Item : any, index : any)=>{
                     return <div className="col-2" key={index}>
                     {Item.seeds == 0 ? 
                     <Unplayeddot onClick={()=>{ZeroCheck(Item.seeds)}} cup>{Item.seeds}</Unplayeddot>                    
@@ -206,7 +209,7 @@ export const Games: FC = ()=> {
                 </div>
                 </div>
                 </div>
-                <div className="col-2 text-left"><HouseDeck>Your <br/>{KalahHouse[13].seeds }</HouseDeck></div>
+                <div className="col-2 text-left"><HouseDeck>Player 1<br/>{KalahHouse[6].seeds }</HouseDeck></div>
                 
             </div>
         </div>
@@ -237,7 +240,7 @@ export const Games: FC = ()=> {
             </div>
 
             <div className="row">
-                <div className="col-2"><HouseDeck cup > Player 2 <br/>{KalahHouse[6].seeds}</HouseDeck></div>
+                <div className="col-2"><HouseDeck cup > Player 1 <br/>{KalahHouse[6].seeds}</HouseDeck></div>
                 <div className="col-8">
                 <div className="row">
                 <div className="text-center">
@@ -260,7 +263,7 @@ export const Games: FC = ()=> {
                 <br/>
                 <div className="row">              
 
-                   {PlayerTwoBoard.map((Item : any, index : any)=>{
+                   {PlayerOneBoardTwo.map((Item : any, index : any)=>{
                     return <div className="col-2" key={index}>
                     {Item.seeds == 0 ? 
                     <Unplayeddot onClick={()=>{ZeroCheck(Item.seeds)}} cup>{Item.seeds}</Unplayeddot>                    
@@ -277,7 +280,7 @@ export const Games: FC = ()=> {
                 </div>
                 </div>
                 </div>
-                <div className="col-2 text-left"><HouseDeck>Player 1 <br/>{KalahHouse[13].seeds }</HouseDeck></div>
+                <div className="col-2 text-left"><HouseDeck>Player 2 <br/>{KalahHouse[13].seeds }</HouseDeck></div>
                 
             </div>
         </div>
