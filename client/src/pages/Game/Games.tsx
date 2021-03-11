@@ -13,6 +13,8 @@ export const Games: FC = ()=> {
 
     const [playerTurn , setplayerTurn] = useState(null);
 
+    var [PlayerofMatch, setPlayerofMatch] = useState(undefined);
+
      const Datafetch =  async (data: any): Promise<void> =>{        
             try {
                 var BoardID = data.id;
@@ -30,7 +32,21 @@ export const Games: FC = ()=> {
         }        
     useEffect(()=>{        
         var data= params;
-        Datafetch(data);        
+          
+
+        var players = localStorage.getItem('players');
+        if(players == null){
+            var player1 = prompt("Enter Player one Name ?");
+            var player2 = prompt("Enter Player two Name ? ");
+
+            var Registeringplayers = {player1, player2};
+            players = JSON.stringify(Registeringplayers);
+            localStorage.setItem('players', players);       
+
+        }
+        var allPlayers = JSON.parse(players);
+        setPlayerofMatch(allPlayers);
+        Datafetch(data);
 
     },[])
 
@@ -89,10 +105,10 @@ export const Games: FC = ()=> {
        var PlayerTwoBoardTwo = PlayerOneBoard.reverse();
        var PlayerOneBoardTwo = PlayerTwoBoard.reverse();
        
+       var AllThatarePlaying: any = PlayerofMatch;
 
-       console.log(KalahHouse)
-        console.log({"playerOne": PlayerOneBoard})
-       console.log({"playerTne": PlayerTwoBoard})
+       var playerx = AllThatarePlaying.player1;
+       var playery = AllThatarePlaying.player2;
 
        if(playerTurn == null){
            return (
@@ -106,11 +122,11 @@ export const Games: FC = ()=> {
             </div>
 
             <div className="row">
-                <div className="col-2"><HouseDeck cup > Player 2 <br/>{KalahHouse[13].seeds}</HouseDeck></div>
+                <div className="col-2"><HouseDeck cup > {playery} <br/>{KalahHouse[13].seeds}</HouseDeck></div>
                 <div className="col-8">
                 <div className="row">
                 <div className="text-center">
-                    <h1 className="display-4">Player 2 </h1>
+                    <h1 className="display-4">{playery} </h1>
                     <br/>
                 </div>
 
@@ -134,11 +150,11 @@ export const Games: FC = ()=> {
                               
                 <div className="text-center">
                 <br/>
-                    <h1 className="display-4">You</h1>
+                    <h1 className="display-4">{playerx}'s Turn</h1>
                 </div>
                 </div>
                 </div>
-                <div className="col-2 text-left"><HouseDeck>Player 1 <br/>{KalahHouse[6].seeds}</HouseDeck></div>
+                <div className="col-2 text-left"><HouseDeck>{playerx} <br/>{KalahHouse[6].seeds}</HouseDeck></div>
                 
             </div>
         </div>
@@ -168,11 +184,11 @@ export const Games: FC = ()=> {
             </div>
 
             <div className="row">
-                <div className="col-2"><HouseDeck cup > Player 2 <br/>{KalahHouse[13].seeds}</HouseDeck></div>
+                <div className="col-2"><HouseDeck cup > {playery} <br/>{KalahHouse[13].seeds}</HouseDeck></div>
                 <div className="col-8">
                 <div className="row">
                 <div className="text-center">
-                    <h1 className="display-4">Player 1 Turn </h1>
+                    <h1 className="display-4">{playerx} Turn </h1>
                     <br/>
                 </div>
 
@@ -209,7 +225,7 @@ export const Games: FC = ()=> {
                 </div>
                 </div>
                 </div>
-                <div className="col-2 text-left"><HouseDeck>Player 1<br/>{KalahHouse[6].seeds }</HouseDeck></div>
+                <div className="col-2 text-left"><HouseDeck>{playerx}<br/>{KalahHouse[6].seeds }</HouseDeck></div>
                 
             </div>
         </div>
@@ -240,11 +256,11 @@ export const Games: FC = ()=> {
             </div>
 
             <div className="row">
-                <div className="col-2"><HouseDeck cup > Player 1 <br/>{KalahHouse[6].seeds}</HouseDeck></div>
+                <div className="col-2"><HouseDeck cup > {playerx} <br/>{KalahHouse[6].seeds}</HouseDeck></div>
                 <div className="col-8">
                 <div className="row">
                 <div className="text-center">
-                    <h1 className="display-4">Player 2 Turn </h1>
+                    <h1 className="display-4">{playery} Turn </h1>
                     <br/>
                 </div>
                  {PlayerOneBoard.map((Item : any, index : any)=>{
@@ -280,7 +296,7 @@ export const Games: FC = ()=> {
                 </div>
                 </div>
                 </div>
-                <div className="col-2 text-left"><HouseDeck>Player 2 <br/>{KalahHouse[13].seeds }</HouseDeck></div>
+                <div className="col-2 text-left"><HouseDeck>{playery} <br/>{KalahHouse[13].seeds }</HouseDeck></div>
                 
             </div>
         </div>

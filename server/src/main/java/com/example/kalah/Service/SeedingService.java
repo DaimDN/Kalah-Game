@@ -51,7 +51,7 @@ public class SeedingService implements SeedingApi {
         for (int i = 0; i < seeds ; i++) {
             Seeding(board,false);
         }
-        
+
 
         int currentHousePosition = board.getCurrentHousePosition();
 
