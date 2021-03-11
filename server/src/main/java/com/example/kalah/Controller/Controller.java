@@ -21,7 +21,7 @@ import java.util.ArrayList;
 @RestController
 public class Controller {
 
-    private Integer Seeds = 4;
+ private Integer Seeds = 4;
     //Adding Services
     @Autowired
     private BoardService boardService;

@@ -54,10 +54,7 @@ export const Games: FC = ()=> {
             }else{
                 alert("In order to delete it Press OK")
                 window.location.reload();
-            }
-             
-            
-            
+            }           
         } catch (error) {
             throw error;
             
@@ -106,7 +103,7 @@ export const Games: FC = ()=> {
             </div>
 
             <div className="row">
-                <div className="col-2"><HouseDeck cup > Player 2 <br/>{KalahHouse[6].seeds - 7}</HouseDeck></div>
+                <div className="col-2"><HouseDeck cup > Player 2 <br/>{KalahHouse[6].seeds}</HouseDeck></div>
                 <div className="col-8">
                 <div className="row">
                 <div className="text-center">
@@ -126,22 +123,19 @@ export const Games: FC = ()=> {
                     return <div className="col-2" key={index}>
                     {Item.seeds == 0 ? 
                     <Unplayeddot onClick={()=>{ZeroCheck(Item.seeds)}} cup>{Item.seeds}</Unplayeddot>                    
-
-                    
                     : 
                    <Playdot onClick={()=>{ZeroCheck(Item.seeds); GameHandler(Item.gameId)}} cup>{Item.seeds}</Playdot>
                     }
                     </div>
                 })}
-                
-              
+                              
                 <div className="text-center">
                 <br/>
                     <h1 className="display-4">You</h1>
                 </div>
                 </div>
                 </div>
-                <div className="col-2 text-left"><HouseDeck>Your <br/>{KalahHouse[13].seeds - 14}</HouseDeck></div>
+                <div className="col-2 text-left"><HouseDeck>Your <br/>{KalahHouse[13].seeds}</HouseDeck></div>
                 
             </div>
         </div>
@@ -171,7 +165,7 @@ export const Games: FC = ()=> {
             </div>
 
             <div className="row">
-                <div className="col-2"><HouseDeck cup > Player 2 <br/>{KalahHouse[6].seeds - 7}</HouseDeck></div>
+                <div className="col-2"><HouseDeck cup > Player 2 <br/>{KalahHouse[6].seeds}</HouseDeck></div>
                 <div className="col-8">
                 <div className="row">
                 <div className="text-center">
@@ -183,10 +177,9 @@ export const Games: FC = ()=> {
                     return <div className="col-2" key={index}>
                     {Item.seeds == 0 ? 
                     <Unplayeddot onClick={()=>{ZeroCheck(Item.seeds)}} cup>{Item.seeds}</Unplayeddot>                    
-
-                    
+                   
                     : 
-                   <Playdot onClick={()=>{ZeroCheck(Item.seeds); GameHandler(Item.gameId)}} cup>{Item.seeds}</Playdot>
+                   <Bluedot onClick={()=>{ZeroCheck(Item.seeds); GameHandler(Item.gameId)}} >{Item.seeds}</Bluedot>
                     }
                     </div>
                 })}
@@ -199,8 +192,6 @@ export const Games: FC = ()=> {
                     return <div className="col-2" key={index}>
                     {Item.seeds == 0 ? 
                     <Unplayeddot onClick={()=>{ZeroCheck(Item.seeds)}} cup>{Item.seeds}</Unplayeddot>                    
-
-                    
                     : 
                    <Playdot onClick={()=>{ZeroCheck(Item.seeds); GameHandler(Item.gameId)}} cup>{Item.seeds}</Playdot>
                     }
@@ -215,7 +206,7 @@ export const Games: FC = ()=> {
                 </div>
                 </div>
                 </div>
-                <div className="col-2 text-left"><HouseDeck>Your <br/>{KalahHouse[13].seeds - 14}</HouseDeck></div>
+                <div className="col-2 text-left"><HouseDeck>Your <br/>{KalahHouse[13].seeds }</HouseDeck></div>
                 
             </div>
         </div>
@@ -246,7 +237,7 @@ export const Games: FC = ()=> {
             </div>
 
             <div className="row">
-                <div className="col-2"><HouseDeck cup > Player 2 <br/>{KalahHouse[6].seeds - 7 }</HouseDeck></div>
+                <div className="col-2"><HouseDeck cup > Player 2 <br/>{KalahHouse[6].seeds}</HouseDeck></div>
                 <div className="col-8">
                 <div className="row">
                 <div className="text-center">
@@ -273,12 +264,9 @@ export const Games: FC = ()=> {
                     return <div className="col-2" key={index}>
                     {Item.seeds == 0 ? 
                     <Unplayeddot onClick={()=>{ZeroCheck(Item.seeds)}} cup>{Item.seeds}</Unplayeddot>                    
-
-                    
                     : 
                    <Bluedot onClick={()=>{ZeroCheck(Item.seeds); GameHandler(Item.gameId)}} cup>{Item.seeds}</Bluedot>
-                    }
-                    
+                    }                   
                     
                     </div>
                 })}               
@@ -289,7 +277,7 @@ export const Games: FC = ()=> {
                 </div>
                 </div>
                 </div>
-                <div className="col-2 text-left"><HouseDeck>Player 1 <br/>{KalahHouse[13].seeds - 14 }</HouseDeck></div>
+                <div className="col-2 text-left"><HouseDeck>Player 1 <br/>{KalahHouse[13].seeds }</HouseDeck></div>
                 
             </div>
         </div>
@@ -305,13 +293,9 @@ export const Games: FC = ()=> {
         </Container>
         </Fragment>
         )
-
-
            }
           
-       }
-
-        
+       }        
     }
     else{
         return(

@@ -20,7 +20,7 @@ export const Home : FC =  ()=> {
             fetch();      
     }, []);
 
-    const Proceed = async () : Promise<void> =>{        
+    const Proceed = async () : Promise<void> =>{         
     var ResponseFromServer : any ;
     let data = await api.post('/', "");
     data = data.data;

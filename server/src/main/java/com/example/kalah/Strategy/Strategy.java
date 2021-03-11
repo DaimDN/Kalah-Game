@@ -32,8 +32,8 @@ public class Strategy implements Serializable {
         this (defaultSeed);
     }
 
-    public Strategy(String gameId, Integer pitStones) {
-        this (pitStones);
+    public Strategy(String gameId, Integer SEEDS) {
+        this (SEEDS);
         this.gameId = gameId;
     }
 
@@ -44,14 +44,14 @@ public class Strategy implements Serializable {
         KalahHouse FRHPA = new KalahHouse(forthHousePlayerA, Seeds);
         KalahHouse FFHPA = new KalahHouse(fifthHousePlayerA, Seeds);
         KalahHouse SIXTHHPA = new KalahHouse(sixthHousePlayerA, Seeds);
-        KalahHouse RightHouse = new KalahHouse(RightKalahIndex);
+        KalahHouse RightHouse = new KalahHouse(RightKalahIndex,0);
         KalahHouse FHPB = new KalahHouse(firstHousePlayerB, Seeds);
         KalahHouse SHPB = new KalahHouse(secondHousePlayerB, Seeds);
         KalahHouse THPB = new KalahHouse(thirdHousePlayerB, Seeds);
         KalahHouse FRHPB = new KalahHouse(forthHousePlayerB, Seeds);
         KalahHouse FFHPB = new KalahHouse(fifthHousePlayerB, Seeds);
         KalahHouse SIXTHHPB = new KalahHouse(sixthHousePlayerB, Seeds);
-        KalahHouse LeftHouse = new KalahHouse(LeftKalahIndex);
+        KalahHouse LeftHouse = new KalahHouse(LeftKalahIndex, 0);
         this.KalahHouse = Arrays.asList(FHPA, SHPA, THPA, FRHPA, FFHPA, SIXTHHPA, RightHouse, FHPB, SHPB, THPB, FRHPB, FFHPB, SIXTHHPB, LeftHouse);
 
     }
@@ -62,7 +62,7 @@ public class Strategy implements Serializable {
     @Override
     public String toString() {
         return "Board{" +
-                ", pits=" + KalahHouse +
+                ", House=" + KalahHouse +
                 ", playerTurn=" + Player +
                 '}';
     }
