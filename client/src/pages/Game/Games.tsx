@@ -11,12 +11,17 @@ export const Games: FC = ()=> {
     let History = useHistory();
     var [gameBoard, setgameBoard] = useState(undefined);
 
+    const [playerTurn , setplayerTurn] = useState(null);
+
      const Datafetch =  async (data: any): Promise<void> =>{        
             try {
                 var BoardID = data.id;
                 var BaseURL = "/" + BoardID;
                 let fetch = await api.get(BaseURL);
                 fetch = fetch.data;
+                var CurrentPlayer = fetch.player;
+                setplayerTurn(CurrentPlayer);
+                console.log(fetch)
                 setgameBoard(fetch);
             } catch (error) {
                 throw error;
@@ -33,14 +38,14 @@ export const Games: FC = ()=> {
      async function GameHandler ( index: any) : Promise<void> {
 
          try {
-               var positionvariant = index;
+            var positionvariant = index;
            if(gameBoard != undefined){
             var BoardID : any = gameBoard            
             BoardID = BoardID.gameId;
+            console.log(positionvariant);
             var BaseURL = "/" + BoardID + "/houses/" + positionvariant;
-            await api.put(BaseURL);
-            window.location.reload(); 
-           
+           await api.put(BaseURL);
+           window.location.reload();       
                            
 
            }
@@ -58,16 +63,18 @@ export const Games: FC = ()=> {
     if(gameBoard){
        const Board: any = gameBoard;
        const BoardId = Board.gameId;
-       var KalahHouse : any = Board.kalahHouse.map((item: any)=>{return item.seeds});
+       var KalahHouse : any = Board.kalahHouse;
        var PlayerOneBoard = KalahHouse.slice(0, 6);
        var PlayerTwoBoard = KalahHouse.slice(7, 13);
 
+       console.log(KalahHouse)
+        console.log({"playerOne": PlayerOneBoard})
+       console.log({"playerTne": PlayerTwoBoard})
 
-       
 
-     
 
-        return (
+       if(playerTurn == null){
+           return (
         <Fragment>
         <Container>
         <InnerContainer> 
@@ -78,7 +85,7 @@ export const Games: FC = ()=> {
             </div>
 
             <div className="row">
-                <div className="col-2"><HouseDeck cup > Player 2 <br/>{KalahHouse[6] - 7}</HouseDeck></div>
+                <div className="col-2"><HouseDeck cup > Player 2 <br/>{KalahHouse[6].seeds - 7}</HouseDeck></div>
                 <div className="col-8">
                 <div className="row">
                 <div className="text-center">
@@ -87,7 +94,7 @@ export const Games: FC = ()=> {
                 </div>
 
                 {PlayerTwoBoard.map((Item : any, index : any)=>{
-                    return <div className="col-2" key={index}><Playdot two>{Item}</Playdot></div>
+                    return <div className="col-2" key={index}><Playdot two>{Item.seeds}</Playdot></div>
                 })}
                 
                 </div>
@@ -95,7 +102,7 @@ export const Games: FC = ()=> {
                 <br/>
                 <div className="row">
                  {PlayerOneBoard.map((Item : any, index : any)=>{
-                    return <div className="col-2" key={index}><Playdot onClick={()=>{GameHandler(index)}} cup>{Item}</Playdot></div>
+                    return <div className="col-2" key={index}><Playdot onClick={()=>{GameHandler(Item.gameId)}} cup>{Item.seeds}</Playdot></div>
                 })}
                 
               
@@ -105,14 +112,123 @@ export const Games: FC = ()=> {
                 </div>
                 </div>
                 </div>
-                <div className="col-2 text-left"><HouseDeck>Your <br/>{KalahHouse[13] - 14}</HouseDeck></div>
+                <div className="col-2 text-left"><HouseDeck>Your <br/>{KalahHouse[13].seeds - 14}</HouseDeck></div>
                 
             </div>
         </div>
         </InnerContainer>
         </Container>
         </Fragment>
-    )
+        )
+
+       }else{
+            /// PlayerOne Board
+           if(playerTurn === 'PlayerOne'){
+             return (
+        <Fragment>
+        <Container>
+        <InnerContainer> 
+        <div className="text-center"> 
+        
+        <div className="alert alert-danger" role="alert">
+            Your Board ID  is : {BoardId}
+            </div>
+
+            <div className="row">
+                <div className="col-2"><HouseDeck cup > Player 2 <br/>{KalahHouse[6].seeds - 7}</HouseDeck></div>
+                <div className="col-8">
+                <div className="row">
+                <div className="text-center">
+                    <h1 className="display-4">Player 1 Turn </h1>
+                    <br/>
+                </div>
+
+                {PlayerTwoBoard.map((Item : any, index : any)=>{
+                    return <div className="col-2" key={index}><Playdot two>{Item.seeds}</Playdot></div>
+                })}
+                
+                </div>
+                <br/>
+                <br/>
+                <div className="row">
+                 {PlayerOneBoard.map((Item : any, index : any)=>{
+                    return <div className="col-2" key={index}><Playdot onClick={()=>{GameHandler(Item.gameId)}} cup>{Item.seeds}</Playdot></div>
+                })}
+                
+              
+                <div className="text-center">
+                <br/>
+                
+                </div>
+                </div>
+                </div>
+                <div className="col-2 text-left"><HouseDeck>Your <br/>{KalahHouse[13].seeds - 14}</HouseDeck></div>
+                
+            </div>
+        </div>
+        </InnerContainer>
+        </Container>
+        </Fragment>
+        )
+
+
+    }else{
+        /// PlayerTwo Board
+
+         return (
+        <Fragment>
+        <Container>
+        <InnerContainer> 
+        <div className="text-center"> 
+        
+        <div className="alert alert-danger" role="alert">
+            Your Board ID  is : {BoardId}
+            </div>
+
+            <div className="row">
+                <div className="col-2"><HouseDeck cup > Player 2 <br/>{KalahHouse[6].seeds - 7 }</HouseDeck></div>
+                <div className="col-8">
+                <div className="row">
+                <div className="text-center">
+                    <h1 className="display-4">Player 2 Turn </h1>
+                    <br/>
+                </div>
+                 {PlayerOneBoard.map((Item : any, index : any)=>{
+                    return <div className="col-2" key={index}><Greendot >{Item.seeds}</Greendot></div>
+                })}             
+                
+                </div>
+                <br/>
+                <br/>
+                <div className="row">
+                
+
+                   {PlayerTwoBoard.map((Item : any, index : any)=>{
+                    return <div className="col-2" key={index}><Bluedot cup  onClick={()=>{GameHandler(Item.gameId)}} two>{Item.seeds}</Bluedot></div>
+                })}
+                
+              
+                <div className="text-center">
+                <br/>
+                   
+                </div>
+                </div>
+                </div>
+                <div className="col-2 text-left"><HouseDeck>Player 1 <br/>{KalahHouse[13].seeds - 14 }</HouseDeck></div>
+                
+            </div>
+        </div>
+        </InnerContainer>
+        </Container>
+        </Fragment>
+        )
+
+
+           }
+          
+       }
+
+        
     }
     else{
         return(
@@ -145,7 +261,63 @@ padding-top: 23px;
 `
 
 
+const Greendot: any  =  styled.div <{cup: boolean}>`
+height: 14vh;
+width: 7vw;
+border-radius: 50%;
+background-color: green;
+color: white;
+font-size: 22px;
+text-align: center;
+padding-top: 23px;
+
+`
+
+const Bluedot: any  =  styled.div <{cup: boolean}>`
+height: 14vh;
+width: 7vw;
+border-radius: 50%;
+background-color: #021aee;
+color: white;
+font-size: 22px;
+text-align: center;
+padding-top: 23px;
+
+${props => props.cup && css`
+   &:hover {
+        background-color: #ef0078;
+        cursor: pointer;
+         transform: scale(1.2);
+    }
+`}
+`
+
+
+
+
 const Playdot: any  =  styled.div <{cup: boolean}>`
+height: 14vh;
+width: 7vw;
+border-radius: 50%;
+background-color: #021aee;
+color: white;
+font-size: 22px;
+text-align: center;
+padding-top: 23px;
+
+${props => props.cup && css`
+   background-color: green;
+   &:hover {
+        background-color: #ef0078;
+        cursor: pointer;
+         transform: scale(1.2);
+    }
+`}
+`
+
+
+
+const PlaydotTwo: any  =  styled.div <{cup: boolean}>`
 height: 14vh;
 width: 7vw;
 border-radius: 50%;
