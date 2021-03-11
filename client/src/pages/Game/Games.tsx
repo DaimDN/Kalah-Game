@@ -35,6 +35,12 @@ export const Games: FC = ()=> {
     },[])
 
 
+    function ZeroCheck(target : any) : any{
+        if(target == 0){
+            alert("House has no seeds");
+        }
+    }
+
     async function deleteHandler(parameter: any): Promise<void>{
         try {   
             parameter  = params;
@@ -117,7 +123,15 @@ export const Games: FC = ()=> {
                 <br/>
                 <div className="row">
                  {PlayerOneBoard.map((Item : any, index : any)=>{
-                    return <div className="col-2" key={index}><Playdot onClick={()=>{GameHandler(Item.gameId)}} cup>{Item.seeds}</Playdot></div>
+                    return <div className="col-2" key={index}>
+                    {Item.seeds == 0 ? 
+                    <Unplayeddot onClick={()=>{ZeroCheck(Item.seeds)}} cup>{Item.seeds}</Unplayeddot>                    
+
+                    
+                    : 
+                   <Playdot onClick={()=>{ZeroCheck(Item.seeds); GameHandler(Item.gameId)}} cup>{Item.seeds}</Playdot>
+                    }
+                    </div>
                 })}
                 
               
@@ -166,7 +180,15 @@ export const Games: FC = ()=> {
                 </div>
 
                 {PlayerTwoBoard.map((Item : any, index : any)=>{
-                    return <div className="col-2" key={index}><Playdot two>{Item.seeds}</Playdot></div>
+                    return <div className="col-2" key={index}>
+                    {Item.seeds == 0 ? 
+                    <Unplayeddot onClick={()=>{ZeroCheck(Item.seeds)}} cup>{Item.seeds}</Unplayeddot>                    
+
+                    
+                    : 
+                   <Playdot onClick={()=>{ZeroCheck(Item.seeds); GameHandler(Item.gameId)}} cup>{Item.seeds}</Playdot>
+                    }
+                    </div>
                 })}
                 
                 </div>
@@ -174,7 +196,16 @@ export const Games: FC = ()=> {
                 <br/>
                 <div className="row">
                  {PlayerOneBoard.map((Item : any, index : any)=>{
-                    return <div className="col-2" key={index}><Playdot onClick={()=>{GameHandler(Item.gameId)}} cup>{Item.seeds}</Playdot></div>
+                    return <div className="col-2" key={index}>
+                    {Item.seeds == 0 ? 
+                    <Unplayeddot onClick={()=>{ZeroCheck(Item.seeds)}} cup>{Item.seeds}</Unplayeddot>                    
+
+                    
+                    : 
+                   <Playdot onClick={()=>{ZeroCheck(Item.seeds); GameHandler(Item.gameId)}} cup>{Item.seeds}</Playdot>
+                    }
+    
+                    </div>
                 })}
                 
               
@@ -223,7 +254,14 @@ export const Games: FC = ()=> {
                     <br/>
                 </div>
                  {PlayerOneBoard.map((Item : any, index : any)=>{
-                    return <div className="col-2" key={index}><Greendot >{Item.seeds}</Greendot></div>
+                    return <div className="col-2" key={index}>
+                    {Item.seeds == 0 ? 
+                    <Unplayeddot onClick={()=>{ZeroCheck(Item.seeds)}} cup>{Item.seeds}</Unplayeddot>                  
+                   
+                    : 
+                   <Greendot onClick={()=>{ZeroCheck(Item.seeds); GameHandler(Item.gameId)}} cup>{Item.seeds}</Greendot>
+                    }
+                    </div>
                 })}             
                 
                 </div>
@@ -232,7 +270,17 @@ export const Games: FC = ()=> {
                 <div className="row">              
 
                    {PlayerTwoBoard.map((Item : any, index : any)=>{
-                    return <div className="col-2" key={index}><Bluedot cup  onClick={()=>{GameHandler(Item.gameId)}} two>{Item.seeds}</Bluedot></div>
+                    return <div className="col-2" key={index}>
+                    {Item.seeds == 0 ? 
+                    <Unplayeddot onClick={()=>{ZeroCheck(Item.seeds)}} cup>{Item.seeds}</Unplayeddot>                    
+
+                    
+                    : 
+                   <Bluedot onClick={()=>{ZeroCheck(Item.seeds); GameHandler(Item.gameId)}} cup>{Item.seeds}</Bluedot>
+                    }
+                    
+                    
+                    </div>
                 })}               
               
                 <div className="text-center">
@@ -294,6 +342,18 @@ padding-top: 23px;
 
 
 `
+const Unplayeddot: any  =  styled.div <{cup: boolean}>`
+height: 14vh;
+width: 7vw;
+border-radius: 50%;
+background-color: red;
+color: white;
+font-size: 22px;
+text-align: center;
+padding-top: 23px;
+
+`
+
 
 
 const Greendot: any  =  styled.div <{cup: boolean}>`
