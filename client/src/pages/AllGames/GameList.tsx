@@ -7,7 +7,6 @@ import './style.css'
 export const GameList : FC = ()=> {
 
     const [game, setGame] = useState(undefined);
-
     const fetch =  async (): Promise<void> =>{
             try {
                 let fetch = await api.get('/all')
@@ -21,7 +20,6 @@ export const GameList : FC = ()=> {
     useEffect(()=>{
         fetch();
     },[])
-
         if(undefined){
              return (
         <Fragment>
@@ -42,7 +40,6 @@ export const GameList : FC = ()=> {
 interface DefaultDataTypeValidation  {
     result: any
 }
-
 const Dataset: FC<DefaultDataTypeValidation> = ({result})  =>{
     const FetchRequest = result;
     localStorage.setItem('StoredGames', JSON.stringify(FetchRequest));  
@@ -52,12 +49,14 @@ const Dataset: FC<DefaultDataTypeValidation> = ({result})  =>{
         <div className="row mx-auto text-center">
         {FetchRequest.map((item : any)=>{
              return <Fragment>
-             <div className="col-3">
-             <div className="deck bg-dark">
-                 <InnerHeading>{item.gameId} </InnerHeading>
-                <a href ={'games/' + item.gameId}className="btn btn-primary btn-lg">Play</a>
-             </div>              
-
+             <div className="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+             <div className="deck bg-secondary">
+                    <div className="alert alert-warning" role="alert">
+                    Board ID: <b>{item.gameId.slice(18, 24).toUpperCase()}</b>
+                    </div>
+             
+                <a href ={'games/' + item.gameId}className="btn btn-info btn-lg">JOIN BOARD</a>
+             </div>    
              </div>
              </Fragment>
         })}

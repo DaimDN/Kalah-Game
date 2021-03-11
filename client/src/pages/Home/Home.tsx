@@ -20,8 +20,13 @@ export const Home : FC =  ()=> {
             fetch();      
     }, []);
 
-    const Proceed = ()=>{
-        History.push("/start")      
+    const Proceed = async () : Promise<void> =>{        
+    var ResponseFromServer : any ;
+    let data = await api.post('/', "");
+    data = data.data;
+    const BoardAddress = data.gameId;
+    var BaseURL = "/games/" + BoardAddress;
+    History.push(BaseURL);            
     }
     
     return (

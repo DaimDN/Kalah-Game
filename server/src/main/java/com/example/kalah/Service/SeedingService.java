@@ -20,15 +20,23 @@ public class SeedingService implements SeedingApi {
         }
 
         if (board.getPlayer() == null) {
-            if (SeedIndex < GameDefault.RightKalahIndex)
+            if (SeedIndex < GameDefault.RightKalahIndex){
                 board.setPlayer(PlayerTurns.PlayerOne);
+            }
             else
+            {
                 board.setPlayer(PlayerTurns.Playertwo);
+            }
+
         }
 
         if (board.getPlayer() == PlayerTurns.PlayerOne && SeedIndex > GameDefault.RightKalahIndex ||
                 board.getPlayer() == PlayerTurns.Playertwo && SeedIndex < GameDefault.RightKalahIndex)
+        {
+
             return board;
+        }
+
 
         KalahHouse house = board.getHouse(SeedIndex);
         int seeds = house.getSeeds();

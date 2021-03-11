@@ -77,7 +77,8 @@ public class Controller {
         return ResponseEntity.ok(board);
     }
 
-
+    @CrossOrigin(origins = "http://localhost:3000")
+    @ResponseStatus(HttpStatus.OK)
     @PutMapping(value = "{BoardId}/houses/{houseId}")
     @ApiOperation(value = "",
             produces = "Application/JSON", response = Strategy.class, httpMethod = "PUT")
