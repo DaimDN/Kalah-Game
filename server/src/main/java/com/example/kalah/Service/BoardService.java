@@ -37,6 +37,11 @@ public class BoardService implements BoardApi {
         return Found.get();
     }
 
+    public  String deleteChoosenGame(String BoardId){
+        boardRepository.deleteByGameId(BoardId);
+        return BoardId;
+    }
+
     public List<Strategy> findAllGames(){
        List found =  boardRepository.findAll();
        return found;

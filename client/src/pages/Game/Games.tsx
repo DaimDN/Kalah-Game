@@ -35,8 +35,31 @@ export const Games: FC = ()=> {
     },[])
 
 
-     async function GameHandler ( index: any) : Promise<void> {
+    async function deleteHandler(parameter: any): Promise<void>{
+        try {   
+            parameter  = params;
+            var deleteId = parameter.id;
+            var BaseURL = '/delete/' + deleteId;
+            var output = prompt("Do you want to deleted your Board ? If yes press OK ");
+            if(output == ""){
+                alert("Your Board is Successfully Deleted")
+                await api.post(BaseURL, "");
+            History.push("/")
+            }else{
+                alert("In order to delete it Press OK")
+                window.location.reload();
+            }
+             
+            
+            
+        } catch (error) {
+            throw error;
+            
+        }
+    }
 
+
+     async function GameHandler ( index: any) : Promise<void> {
          try {
             var positionvariant = index;
            if(gameBoard != undefined){
@@ -45,21 +68,15 @@ export const Games: FC = ()=> {
             console.log(positionvariant);
             var BaseURL = "/" + BoardID + "/houses/" + positionvariant;
            await api.put(BaseURL);
-           window.location.reload();       
-                           
-
+           window.location.reload();   
+                       
            }
              
          } catch (error) {
              throw error;
              
          }
-         
-
        }
-
-
-
     if(gameBoard){
        const Board: any = gameBoard;
        const BoardId = Board.gameId;
@@ -70,8 +87,6 @@ export const Games: FC = ()=> {
        console.log(KalahHouse)
         console.log({"playerOne": PlayerOneBoard})
        console.log({"playerTne": PlayerTwoBoard})
-
-
 
        if(playerTurn == null){
            return (
@@ -116,6 +131,13 @@ export const Games: FC = ()=> {
                 
             </div>
         </div>
+        </InnerContainer>
+           <br/>
+        <InnerContainer>
+        <div className="text-center">
+        <button onClick={deleteHandler} className="btn btn-lg btn-danger">Delete Board </button>
+        </div>
+        
         </InnerContainer>
         </Container>
         </Fragment>
@@ -167,6 +189,13 @@ export const Games: FC = ()=> {
             </div>
         </div>
         </InnerContainer>
+           <br/>
+        <InnerContainer>
+        <div className="text-center">
+        <button onClick={deleteHandler} className="btn btn-lg btn-danger">Delete Board </button>
+        </div>
+        
+        </InnerContainer>
         </Container>
         </Fragment>
         )
@@ -200,13 +229,11 @@ export const Games: FC = ()=> {
                 </div>
                 <br/>
                 <br/>
-                <div className="row">
-                
+                <div className="row">              
 
                    {PlayerTwoBoard.map((Item : any, index : any)=>{
                     return <div className="col-2" key={index}><Bluedot cup  onClick={()=>{GameHandler(Item.gameId)}} two>{Item.seeds}</Bluedot></div>
-                })}
-                
+                })}               
               
                 <div className="text-center">
                 <br/>
@@ -219,6 +246,14 @@ export const Games: FC = ()=> {
             </div>
         </div>
         </InnerContainer>
+        <br/>
+        <InnerContainer>
+        <div className="text-center">
+        <button onClick={deleteHandler} className="btn btn-lg btn-danger">Delete Board </button>
+        </div>
+        
+        </InnerContainer>
+                
         </Container>
         </Fragment>
         )

@@ -20,20 +20,23 @@ export const GameList : FC = ()=> {
     useEffect(()=>{
         fetch();
     },[])
-        if(undefined){
-             return (
-        <Fragment>
-        <div className="container text-center">
-        <h1 className="display-4"> No Games Available </h1>
-        </div>
-        </Fragment>)}
-        else{
-        return (
+        if(game != undefined){
+         return (
         <Fragment>
         <div className="row">
         <Dataset result={game}/>
         </div>
         </Fragment>
+        )}
+        else{
+        return (
+        <Fragment>
+        <div className="container text-center">
+        <h1 className="display-4"> No Games Available </h1>
+        </div>
+        </Fragment>
+
+       
     )}   
 }
 

@@ -37,6 +37,21 @@ public class Controller {
         return landingPage;
     }
 
+
+    @CrossOrigin
+    @ResponseStatus(HttpStatus.OK)
+    @PostMapping(value = "delete/{gameId}")
+    @ApiOperation( value = "", produces = "application/json", response = Strategy.class, httpMethod = "POST")
+    public ResponseEntity<String> DeleteBoard(
+            @ApiParam(value = "", required = true)
+            @PathVariable(value = "gameId") String gameId) throws Exception {
+        boardService.deleteChoosenGame(gameId);
+        String AfterDeletion = gameId.toString();
+        return ResponseEntity.ok(AfterDeletion);
+    }
+
+
+
     @CrossOrigin(origins = "http://localhost:3000")
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/default")
