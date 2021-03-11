@@ -10,6 +10,9 @@ import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -25,7 +28,6 @@ public class BoardService implements BoardApi {
         return strategy;
     }
 
-    @Cacheable(value = "KalahBoard", key = "#id" , unless = "#result  == null")
     public Strategy loadGame (String id)  {
         Optional<Strategy> Found = boardRepository.findById(id);
 
@@ -33,6 +35,11 @@ public class BoardService implements BoardApi {
             throw new ResourceNotFoundException("Board not found!");
 
         return Found.get();
+    }
+
+    public List<Strategy> findAllGames(){
+       List found =  boardRepository.findAll();
+       return found;
     }
 
     public Strategy updateGame (Strategy board){

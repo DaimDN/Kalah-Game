@@ -1,12 +1,49 @@
-import React, {Fragment, FC} from 'react'
+import React, {Fragment, FC, useEffect, useState} from 'react'
 import styled, {css} from 'styled-components'
+import {
+  useHistory,  
+  useParams
+} from "react-router-dom";
+import {api} from '../../util/api'
 
 export const Games: FC = ()=> {
-    return (
+    var params = useParams();
+    let History = useHistory();
+    var [gameBoard, setgameBoard] = useState(undefined);
+
+     const Datafetch =  async (data: any): Promise<void> =>{        
+            try {
+                var BoardID = data.id;
+                var BaseURL = "/" + BoardID;
+                let fetch = await api.get(BaseURL);
+                fetch = fetch.data;
+                setgameBoard(fetch);
+            } catch (error) {
+                throw error;
+                           
+            }            
+        }         
+        
+    useEffect(()=>{        
+        var data= params;
+        Datafetch(data);        
+
+    },[])
+
+
+    if(gameBoard){
+       const Board: any = gameBoard;
+       const BoardId = Board.gameId;
+
+        return (
         <Fragment>
         <Container>
         <InnerContainer> 
         <div className="text-center"> 
+        
+        <div className="alert alert-danger" role="alert">
+            Your Board ID  is : {BoardId}
+            </div>
 
             <div className="row">
                 <div className="col-2"><Playdot cup >0</Playdot></div>
@@ -48,6 +85,20 @@ export const Games: FC = ()=> {
         </Container>
         </Fragment>
     )
+    }
+    else{
+        return(
+            <Fragment>
+            <div className="text-center container">
+            <h1 className="display-1"> Game Not Found </h1>
+            <a href="/games/" className="btn btn-primary btn-lg">Browse Games </a>
+            </div>
+
+            </Fragment>
+        )
+    }
+
+    
 }
 
 

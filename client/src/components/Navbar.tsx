@@ -11,7 +11,7 @@ export const Navbar: FC = ()=> {
             <a className="p-2 text-dark" href="#">Task </a>
             <a className="p-2 text-dark" href="#">Cycleon</a>
             </nav>
-            <a className="btn btn-outline-primary" href="#">About</a>
+            <a className="btn btn-outline-primary" href="/games">ALL GAMES</a>
             </div>
             
         </Fragment>

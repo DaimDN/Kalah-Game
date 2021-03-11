@@ -15,6 +15,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 @RestController
 public class Controller {
 
@@ -42,7 +45,8 @@ public class Controller {
     }
 
 
-
+    @CrossOrigin(origins = "http://localhost:3000")
+    @ResponseStatus(HttpStatus.OK)
     @GetMapping("{BoardId}")
     @ApiOperation(value = "",
             produces = "Application/JSON", response = Strategy.class, httpMethod = "GET")
@@ -54,7 +58,16 @@ public class Controller {
         return ResponseEntity.ok(boardService.loadGame(gameId));
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping(value = "/all", produces = "application/json")
+    public ArrayList<Strategy> getAllGames(){
+      return (ArrayList<Strategy>) boardService.findAllGames();
 
+    }
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @ResponseStatus(HttpStatus.OK)
     @PostMapping
     @ApiOperation( value = "", produces = "application/json", response = Strategy.class, httpMethod = "POST")
     public ResponseEntity<Strategy> CreateBoard() throws Exception {

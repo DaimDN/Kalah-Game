@@ -5,6 +5,7 @@ import {Home} from '../pages/Home'
 import {Navbar} from '../components/Navbar'
 import {Games} from '../pages/Game'
 import {Errors} from '../components/Error'
+import {GameList} from '../pages/AllGames'
 
 
 export const Routing: FC = ()=> {
@@ -24,8 +25,11 @@ export const Routing: FC = ()=> {
                     
       }
   }
+
+  
   useEffect(()=>{
-      fetch();      
+      fetch();  
+      
 }, []);
 if(!serverStatus){
   return(   
@@ -36,7 +40,6 @@ if(!serverStatus){
     </Fragment>
 )  
 }
-
 else{
   return (
     <Router>
@@ -45,18 +48,14 @@ else{
       <Switch>
         <Route exact path="/" component={Home}/>
         <Route path="/start" component={Games}/>
+        <Route path="/games/:id" component={Games} />
+        <Route path="/games" component={GameList}/>        
         <Route  path={path} component={DefaultRoute} />           
       </Switch>
     </Fragment>
   </Router>    
 )
-
-}
-
-  }   
-
-
-
+}  }   
 const DefaultRoute = ()=> {
   return (
     <Fragment>

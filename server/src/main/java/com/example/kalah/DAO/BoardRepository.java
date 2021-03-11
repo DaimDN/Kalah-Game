@@ -4,7 +4,12 @@ import com.example.kalah.Api.BoardApi;
 import com.example.kalah.Strategy.Strategy;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
+import java.util.List;
+
 public interface BoardRepository extends MongoRepository<Strategy, String>  {
+
+    List<Strategy> findAll();
+
 
 
 }
