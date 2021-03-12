@@ -5,9 +5,9 @@ Kalah, also called Kalaha or Mancala, is a game in the mancala family invented i
 
 ## List of Required Applications
 
-### Java Development Kit, JVM, Nodejs, Apache Maven 
+##### Packages:  Java Development Kit, JVM, Nodejs, Apache Maven 
 
-### clone the repository and navigate to the folder using Command Line Interface 
+##### Path:  clone the repository and navigate to the folder using Command Line Interface 
 
 ## Change Directory to Client folder and Run
 
