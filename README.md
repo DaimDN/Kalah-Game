@@ -20,7 +20,7 @@ Kalah, also called Kalaha or Mancala, is a game in the mancala family invented i
 
 ##### Change Directory to the Server Folder and run 
 
-<code> mvn clean  <code>
+<code> mvn clean  </code>
 
 ##### And then run 
 <code>mvn spring-boot:run </code>
