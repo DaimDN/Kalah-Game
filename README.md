@@ -3,6 +3,10 @@ Kalah, also called Kalaha or Mancala, is a game in the mancala family invented i
 
 ### clone the repository and navigate to the folder using Command Line Interface 
 
-## cd to Client and run 
+## Change Directory to Client folder and Run
 
 <code> npm i </code>
+
+## After Installation Run 
+
+<code> npm run start </code>
