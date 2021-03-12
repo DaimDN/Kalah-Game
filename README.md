@@ -17,7 +17,7 @@ Kalah, also called Kalaha or Mancala, is a game in the mancala family invented i
 
 <code> npm run start </code>
 
-#### The Application is located at http://localhost:3000
+#### The Front-end of the Application is located at http://localhost:3000
 
 
 ## Running the Backend Server 
@@ -29,3 +29,4 @@ Kalah, also called Kalaha or Mancala, is a game in the mancala family invented i
 ##### And then run 
 <code>mvn spring-boot:run </code>
 
+#### The Backend of the Application is located at http://localhost:7000
