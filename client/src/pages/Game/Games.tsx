@@ -29,11 +29,10 @@ export const Games: FC = ()=> {
                 throw error;
                            
             }            
-        }        
-    useEffect(()=>{        
-        var data= params;
-          
+        } 
 
+    useEffect(()=>{        
+        var data= params;        
         var players = localStorage.getItem('players');
         if(players == null){
             var player1 = prompt("Enter Player one Name ?");
@@ -107,8 +106,66 @@ export const Games: FC = ()=> {
        
        var AllThatarePlaying: any = PlayerofMatch;
 
-       var playerx = AllThatarePlaying.player1;
+       var playerx : any = AllThatarePlaying.player1;
        var playery = AllThatarePlaying.player2;
+
+        const deleteTargetedURL : any = params;
+        var URL : any  = deleteTargetedURL.id;
+
+
+       //Checking for who is the winner
+
+      let checker = PlayerOneBoard.every(function(item : any){
+          return item.seeds == 0;
+      })
+
+     let checker2 = PlayerTwoBoard.every(function(item : any){
+          return item.seeds == 0;
+      })
+
+      if(checker === true){
+          return(
+              <div className="text-center mx-auto">
+               <h1 className="display-1"> 
+              <span style={{color: 'pink'}}>{playerx}</span>
+              </h1>
+
+              <h1 className="display-5"> 
+              
+               won the Game </h1>
+               <br/>
+               <br/>
+             <a href="/" className="btn btn-primary btn-lg"> Home </a> &nbsp; &nbsp;
+               <button onClick={deleteHandler} className="btn btn-danger btn-lg">Delete Board </button>
+             
+
+              </div>
+          )
+      }
+
+       if(checker2 === true){
+          return(
+              <div className="text-center mx-auto">
+               <h1 className="display-1"> 
+              <span style={{color: 'pink'}}>{playery}</span>
+              </h1>
+
+              <h1 className="display-5"> 
+              
+               won the Game </h1>
+               <br/>
+               <br/>
+               <a href="/" className="btn btn-primary btn-lg"> Home </a> &nbsp; &nbsp;
+                <button onClick={deleteHandler} className="btn btn-danger btn-lg">Delete Board </button>
+             
+
+              </div>
+          )
+      }
+
+
+
+       console.log(checker)
 
        if(playerTurn == null){
            return (
