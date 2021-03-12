@@ -82,11 +82,11 @@ public class SeedingService implements SeedingApi {
         KalahHouse ParralledHouse = board.getHouse(GameDefault.totalHouses - currentPosition);
 
         if (TargettedHouse.EmptySeededHouse() && !ParralledHouse.EmptySeededHouse()) {
-            Integer ParallelSeed = ParralledHouse.getSeeds();
+            Integer ParallelHouseSeed = ParralledHouse.getSeeds();
             ParralledHouse.EmptyHouse();
             Integer HouseIndex = currentPosition < GameDefault.RightKalahIndex ? GameDefault.RightKalahIndex: GameDefault.LeftKalahIndex;
             KalahHouse house = board.getHouse(HouseIndex);
-            house.addSeed(ParallelSeed + 1);
+            house.addSeed(ParallelHouseSeed + 1);
             return;
         }
 

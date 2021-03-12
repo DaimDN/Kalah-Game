@@ -123,8 +123,16 @@ export const Games: FC = ()=> {
           return item.seeds == 0;
       })
 
-      if(checker === true){
-          return(
+
+  
+    if(checker === true){
+
+     var PlayerOneScore = KalahHouse[6].seeds;
+     var PlayerTwoScore = KalahHouse[13].seeds;
+     PlayerTwoScore = PlayerTwoScore + (PlayerTwoBoard.reduce((a : any, b: any) => ({seeds: a.seeds + b.seeds}))).seeds;
+
+     if(PlayerOneScore > PlayerTwoScore){
+        return(
               <div className="text-center mx-auto">
                <h1 className="display-1"> 
               <span style={{color: 'pink'}}>{playerx}</span>
@@ -141,10 +149,10 @@ export const Games: FC = ()=> {
 
               </div>
           )
-      }
 
-       if(checker2 === true){
-          return(
+     }   
+     else{
+        return(
               <div className="text-center mx-auto">
                <h1 className="display-1"> 
               <span style={{color: 'pink'}}>{playery}</span>
@@ -161,6 +169,63 @@ export const Games: FC = ()=> {
 
               </div>
           )
+
+     }       
+
+        
+         
+      }
+
+       if(checker2 === true){
+       var PlayerOneScore = KalahHouse[6].seeds;
+       var PlayerTwoScore = KalahHouse[13].seeds;
+        PlayerOneScore = PlayerOneScore + (PlayerOneBoard.reduce((a : any, b: any) => ({seeds: a.seeds + b.seeds}))).seeds;
+
+        if(PlayerOneScore < PlayerTwoScore){
+                 return(
+              <div className="text-center mx-auto">
+               <h1 className="display-1"> 
+              <span style={{color: 'pink'}}>{playery}</span>
+              </h1>
+
+              <h1 className="display-5"> 
+              
+               won the Game </h1>
+               <br/>
+               <br/>
+             <a href="/" className="btn btn-primary btn-lg"> Home </a> &nbsp; &nbsp;
+               <button onClick={deleteHandler} className="btn btn-danger btn-lg">Delete Board </button>
+             
+
+              </div>
+          )
+
+        }
+
+        else{
+            return(
+              <div className="text-center mx-auto">
+               <h1 className="display-1"> 
+              <span style={{color: 'pink'}}>{playerx}</span>
+              </h1>
+
+              <h1 className="display-5"> 
+              
+               won the Game </h1>
+               <br/>
+               <br/>
+               <a href="/" className="btn btn-primary btn-lg"> Home </a> &nbsp; &nbsp;
+                <button onClick={deleteHandler} className="btn btn-danger btn-lg">Delete Board </button>
+             
+
+              </div>
+          )
+
+
+
+        }
+
+
       }
 
 
