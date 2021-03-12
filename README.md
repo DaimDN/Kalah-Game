@@ -24,6 +24,10 @@ Kalah, also called Kalaha or Mancala, is a game in the mancala family invented i
 
 ##### Change Directory to the Server Folder and run 
 
+##### Install the package 
+<code> mvn install </code>
+
+##### Building the package 
 <code> mvn clean  </code>
 
 ##### And then run 
