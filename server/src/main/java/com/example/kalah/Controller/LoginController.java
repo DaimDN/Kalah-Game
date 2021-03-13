@@ -1,8 +1,11 @@
 package com.example.kalah.Controller;
 
+import com.example.kalah.Exceptions.AuthExceptions;
 import com.example.kalah.user.Repository.UserRespository;
 import com.example.kalah.user.Repository.user;
 import com.example.kalah.user.UserAuth.Login;
+import com.example.kalah.util.JsonWebToken;
+import com.example.kalah.util.Token;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -21,19 +24,24 @@ public class LoginController {
 
     @CrossOrigin("http://localhost:5000")
     @PostMapping(path = "/login", consumes = "application/json", produces = "application/json")
-     String login(@RequestBody Login login){
+     Object login(@RequestBody Login login){
         String email = login.getEmail();
         user founduser = userRespository.findByEmail(email);
         if(founduser != null){
             boolean check = passwordEncoder.matches(login.getPassword(), founduser.getPassword());
             if(check){
-                return "true";
+                JsonWebToken jwt = new JsonWebToken();
+                String Token = jwt.generateToken(founduser);
+                Token token = new Token(Token);
+                return token;
             }
             else {
-                return "wrong password";
+                AuthExceptions authExceptions = new AuthExceptions("Credentails Invalid");
+                return authExceptions;
             }
         }else{
-            return "User doesnt exist";
+            AuthExceptions authExceptions = new AuthExceptions("Invalid User");
+            return authExceptions;
         }
     }
 

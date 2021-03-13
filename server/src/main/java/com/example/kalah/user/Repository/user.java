@@ -25,6 +25,13 @@ public class user {
     private String email;
     private String password;
 
+    public user(String id, String firstname, String lastname, String email) {
+        this.id = id;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.email = email;
+    }
+
     @Override
     public String toString() {
         return "user{" +
