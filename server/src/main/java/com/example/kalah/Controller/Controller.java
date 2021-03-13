@@ -37,8 +37,7 @@ public class Controller {
         return landingPage;
     }
 
-
-    @CrossOrigin
+     @CrossOrigin
     @ResponseStatus(HttpStatus.OK)
     @PostMapping(value = "delete/{gameId}")
     @ApiOperation( value = "", produces = "application/json", response = Strategy.class, httpMethod = "POST")
