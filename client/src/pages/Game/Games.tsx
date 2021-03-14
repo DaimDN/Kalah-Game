@@ -304,12 +304,10 @@ export const Games: FC = ()=> {
         <Fragment>
         <Container>
         <InnerContainer> 
-        <div className="text-center"> 
-        
+        <div className="text-center">         
         <div className="alert alert-danger" role="alert">
             Your Board ID  is : {BoardId}
             </div>
-
             <div className="row">
                 <div className="col-2"><HouseDeck cup > {playerx} <br/>{KalahHouse[6].seeds}</HouseDeck></div>
                 <div className="col-8">
@@ -322,18 +320,15 @@ export const Games: FC = ()=> {
                     return <div className="col-2" key={index}>
                     {Item.seeds == 0 ? 
                     <Unplayeddot onClick={()=>{ZeroCheck(Item.seeds)}} cup>{Item.seeds}</Unplayeddot>                  
-                   
                     : 
                    <Greendot onClick={()=>{ZeroCheck(Item.seeds); GameHandler(Item.gameId)}} cup>{Item.seeds}</Greendot>
                     }
                     </div>
                 })}             
-                
                 </div>
                 <br/>
                 <br/>
-                <div className="row">              
-
+                <div className="row">           
                    {PlayerOneBoardTwo.map((Item : any, index : any)=>{
                     return <div className="col-2" key={index}>
                     {Item.seeds == 0 ? 
@@ -341,13 +336,10 @@ export const Games: FC = ()=> {
                     : 
                    <Bluedot onClick={()=>{ZeroCheck(Item.seeds); GameHandler(Item.gameId)}} cup>{Item.seeds}</Bluedot>
                     }                   
-                    
                     </div>
                 })}               
-              
                 <div className="text-center">
                 <br/>
-                   
                 </div>
                 </div>
                 </div>

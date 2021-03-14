@@ -10,6 +10,7 @@ import store from '../store';
 import Private from './Private'
 import loadUser from '../reducers/Auth';
 import {setToken} from '../util/setToken';
+import {LoginController} from '../auth/Login'
 
 export const Routing: FC = ()=> {
   const [path, setPath] : any = useState(undefined);
@@ -49,6 +50,7 @@ else{
       <Navbar/>                
       <Switch>
         <Route exact path="/" component={Home}/>
+        <Route path="/login" component={LoginController}/>
         <Route path="/start" component={Games}/>
         <Route path="/games/:id" component={Games} />
         <Route path="/games" component={GameList}/> 
