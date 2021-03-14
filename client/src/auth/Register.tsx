@@ -13,8 +13,8 @@ export const RegisterationController : FC = () => {
       password2: ''
     });
 
-    const [Alert, setAlert] = useState(false);
-  
+    const [Alert, setAlert] = useState("");
+    const History = useHistory();
     const { firstname, lastname, email, password, password2 } = formData;
   
     const onChange = (e: any) =>
@@ -23,24 +23,30 @@ export const RegisterationController : FC = () => {
     const onSubmit = async (e: any) : Promise<void> => {
       e.preventDefault();
       if (password !== password2) {
-        setAlert(true);
-        setTimeout(function(){ setAlert(false)}, 1000);
+        setAlert("Password didn't match");
+        setTimeout(function(){ setAlert("")}, 1000);
 
       } else {
           var RegisterPayload = {firstname, lastname, email, password};
           let RegisterDone = await api.post('/register', RegisterPayload);
+          const Response = RegisterDone.data;
+          if(Response.error){
+              setAlert(Response.error);
+              setTimeout(function(){ setAlert("")}, 1000);
+          }
 
-        console.log(RegisterDone);
+          alert("Successfully Registered");
+          History.push("/login");        
       }
     }; 
   
     return (
       <Fragment>
              <div className="mx-auto text-center">
-                 {Alert === true ? 
+                 {Alert !== "" ? 
                  <div style={{width: '60%', margin: 'auto'}}> 
                  <div className="alert alert-danger"> 
-                    <p className="lead">Password didn't match</p>
+                    <p className="lead">{Alert}</p>
                   </div> 
                         </div>
                   : <div></div> }

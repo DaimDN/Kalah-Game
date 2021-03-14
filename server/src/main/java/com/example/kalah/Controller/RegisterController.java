@@ -44,7 +44,7 @@ public class RegisterController {
         }else{
             return ResponseEntity.ok(new AuthExceptions("User Already Exists"));
         }
-        
+
 
         return ResponseEntity.ok(USER);
 
