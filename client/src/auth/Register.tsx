@@ -39,9 +39,7 @@ export const RegisterationController : FC = () => {
           else{
                 alert("Successfully Registered");
           History.push("/login"); 
-          }
-
-                 
+          }     
       }
     }; 
   

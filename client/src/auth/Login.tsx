@@ -3,14 +3,16 @@ import React, {
     useEffect,
      useState, Fragment 
     } from 'react'
-import {Redirect, Link} from 'react-router-dom'
-import {LoginHandler} from '../action/Auth';
+import {Redirect, Link, useHistory} from 'react-router-dom'
+import {LoginHandler} from '../action/Auth'
 import styled from 'styled-components'
 import { connect } from 'react-redux';
+import store from '../store';
+import {LocalStorageTokenChecker} from '../action/Auth'
 
 interface LoginControllerPropsInterface  {
-    login: any;
-    isAuthenticated : boolean;
+  login: any;
+  isAuthenticated : boolean;
 }
 
 export const LoginController: any  = (
@@ -22,14 +24,27 @@ export const LoginController: any  = (
     const onChange = (e : any) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
+    var [isAuth, setisAuth] = useState(false);
+
     const onSubmit = (e : any)=> {
         e.preventDefault();
         var payload = {email, password};
        LoginHandler(payload);
     };
-    if (isAuthenticated) {
-        return <Redirect to="/Game" />;
-    }    
+    let Redirect = useHistory();
+
+    useEffect(()=>{  
+      LocalStorageTokenChecker();  
+      store.subscribe(()=>{    
+        let allStates = store.getState();
+        let getAuth = allStates.auth.isAuthenticated;        
+        setisAuth(getAuth);      
+      })
+    }, [isAuth])    
+    if(isAuth){
+      Redirect.push('/home');           
+    }
+    
     return (
         <Fragment>
             <div className="mx-auto text-center">
@@ -74,15 +89,9 @@ export const LoginController: any  = (
       );
     };   
 
+    
 
 const InnerLoginContainer = styled.div`
 width: 40%;
 margin: auto;
 `
-
-const mapStateToProps = (state: any) => ({
-  isAuthenticated: state.auth.isAuthenticated
-});
-
-
-export default connect(mapStateToProps, { LoginHandler })(LoginController);

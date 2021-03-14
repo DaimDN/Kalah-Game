@@ -1,11 +1,13 @@
 import React, {FC, Fragment, useState, useEffect} from 'react'
 import {api} from '../../util/api'
 import styled from 'styled-components'
-import {useHistory} from 'react-router-dom'
-
+import {useHistory, Redirect} from 'react-router-dom'
+import {LocalStorageTokenChecker} from '../../action/Auth'
+import store from '../../store'
 export const Home : FC =  ()=> {
     const [data, setData] : any = useState(undefined);
     let History = useHistory();
+    const [auth, setAuth] = useState(null);
         const fetch =  async (): Promise<void> =>{
             try {
                 let fetch = await api.get('/')
@@ -17,8 +19,17 @@ export const Home : FC =  ()=> {
             }
         }
         useEffect(()=>{
-            fetch();      
-    }, []);
+            fetch(); 
+            LocalStorageTokenChecker();  
+            store.subscribe(()=>{    
+                let allStates = store.getState();
+                let getAuth = allStates.auth.isAuthenticated;        
+                setAuth(getAuth);      
+            })
+
+    });
+
+      
 
     const Proceed = async () : Promise<void> =>{         
     var ResponseFromServer : any ;

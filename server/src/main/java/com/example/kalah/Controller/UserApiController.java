@@ -27,6 +27,8 @@ public class UserApiController {
     @Autowired
     private UserRespository userRespository;
 
+
+    @CrossOrigin("http://localhost:3000")
     @RequestMapping(value = "/authUser", method = RequestMethod.GET)
     public ResponseEntity<?> UserFinderandAuth(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws Exception {
 
