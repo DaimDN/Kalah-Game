@@ -28,9 +28,9 @@ export const RegisterationController : FC = () => {
 
       } else {
           var RegisterPayload = {firstname, lastname, email, password};
-          //let RegisterDone = await api.post('/register', RegisterPayload);
+          let RegisterDone = await api.post('/register', RegisterPayload);
 
-        console.log(RegisterPayload);
+        console.log(RegisterDone);
       }
     }; 
   

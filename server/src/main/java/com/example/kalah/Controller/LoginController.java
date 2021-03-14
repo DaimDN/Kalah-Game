@@ -24,7 +24,7 @@ public class LoginController {
 
     @CrossOrigin("http://localhost:3000")
     @PostMapping(path = "/login", consumes = "application/json", produces = "application/json")
-     Object login(@RequestBody Login login){
+    Object login(@RequestBody Login login){
         String email = login.getEmail();
         user founduser = userRespository.findByEmail(email);
         if(founduser != null){
