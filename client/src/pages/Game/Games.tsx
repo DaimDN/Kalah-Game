@@ -10,9 +10,7 @@ export const Games: FC = ()=> {
     var params = useParams();
     let History = useHistory();
     var [gameBoard, setgameBoard] = useState(undefined);
-
     const [playerTurn , setplayerTurn] = useState(null);
-
     var [PlayerofMatch, setPlayerofMatch] = useState(undefined);
 
      const Datafetch =  async (data: any): Promise<void> =>{        
@@ -26,8 +24,7 @@ export const Games: FC = ()=> {
                 console.log(fetch)
                 setgameBoard(fetch);
             } catch (error) {
-                throw error;
-                           
+                throw error;                           
             }            
         } 
 
@@ -37,22 +34,19 @@ export const Games: FC = ()=> {
         if(players == null){
             var player1 = prompt("Enter Player one Name ?");
             var player2 = prompt("Enter Player two Name ? ");
-
             var Registeringplayers = {player1, player2};
             players = JSON.stringify(Registeringplayers);
-            localStorage.setItem('players', players);       
-
+            localStorage.setItem('players', players);      
         }
         var allPlayers = JSON.parse(players);
         setPlayerofMatch(allPlayers);
         Datafetch(data);
-
     },[])
 
 
     function ZeroCheck(target : any) : any{
         if(target == 0){
-            alert("House has no seeds");
+        alert("House has no seeds");
         }
     }
 
@@ -85,13 +79,10 @@ export const Games: FC = ()=> {
             BoardID = BoardID.gameId;
             var BaseURL = "/" + BoardID + "/houses/" + positionvariant;
            await api.put(BaseURL);
-           window.location.reload();   
-                       
-           }
-             
+           window.location.reload();        
+           }             
          } catch (error) {
-             throw error;
-             
+             throw error;             
          }
        }
     if(gameBoard){
@@ -100,53 +91,36 @@ export const Games: FC = ()=> {
        var KalahHouse : any = Board.kalahHouse;
        var PlayerOneBoard = KalahHouse.slice(0, 6);
        var PlayerTwoBoard = KalahHouse.slice(7, 13).reverse();
-
        var PlayerTwoBoardTwo = PlayerOneBoard.reverse();
-       var PlayerOneBoardTwo = PlayerTwoBoard.reverse();
-       
+       var PlayerOneBoardTwo = PlayerTwoBoard.reverse();       
        var AllThatarePlaying: any = PlayerofMatch;
-
        var playerx : any = AllThatarePlaying.player1;
        var playery = AllThatarePlaying.player2;
-
         const deleteTargetedURL : any = params;
         var URL : any  = deleteTargetedURL.id;
-
-
        //Checking for who is the winner
 
       let checker = PlayerOneBoard.every(function(item : any){
           return item.seeds == 0;
       })
-
      let checker2 = PlayerTwoBoard.every(function(item : any){
           return item.seeds == 0;
-      })
-
-
-  
+      })  
     if(checker === true){
-
      var PlayerOneScore = KalahHouse[6].seeds;
      var PlayerTwoScore = KalahHouse[13].seeds;
      PlayerTwoScore = PlayerTwoScore + (PlayerTwoBoard.reduce((a : any, b: any) => ({seeds: a.seeds + b.seeds}))).seeds;
-
      if(PlayerOneScore > PlayerTwoScore){
         return(
               <div className="text-center mx-auto">
                <h1 className="display-1"> 
               <span style={{color: 'pink'}}>{playerx}</span>
               </h1>
-
-              <h1 className="display-5"> 
-              
-               won the Game </h1>
+              <h1 className="display-5"> won the Game </h1>
                <br/>
                <br/>
              <a href="/" className="btn btn-primary btn-lg"> Home </a> &nbsp; &nbsp;
                <button onClick={deleteHandler} className="btn btn-danger btn-lg">Delete Board </button>
-             
-
               </div>
           )
 
@@ -157,23 +131,14 @@ export const Games: FC = ()=> {
                <h1 className="display-1"> 
               <span style={{color: 'pink'}}>{playery}</span>
               </h1>
-
-              <h1 className="display-5"> 
-              
-               won the Game </h1>
+              <h1 className="display-5">won the Game </h1>
                <br/>
                <br/>
                <a href="/" className="btn btn-primary btn-lg"> Home </a> &nbsp; &nbsp;
                 <button onClick={deleteHandler} className="btn btn-danger btn-lg">Delete Board </button>
-             
-
               </div>
           )
-
-     }       
-
-        
-         
+     }     
       }
 
        if(checker2 === true){
@@ -187,19 +152,14 @@ export const Games: FC = ()=> {
                <h1 className="display-1"> 
               <span style={{color: 'pink'}}>{playery}</span>
               </h1>
-
-              <h1 className="display-5"> 
-              
+              <h1 className="display-5">              
                won the Game </h1>
                <br/>
                <br/>
              <a href="/" className="btn btn-primary btn-lg"> Home </a> &nbsp; &nbsp;
                <button onClick={deleteHandler} className="btn btn-danger btn-lg">Delete Board </button>
-             
-
               </div>
           )
-
         }
 
         else{
@@ -208,41 +168,26 @@ export const Games: FC = ()=> {
                <h1 className="display-1"> 
               <span style={{color: 'pink'}}>{playerx}</span>
               </h1>
-
               <h1 className="display-5"> 
-              
                won the Game </h1>
                <br/>
                <br/>
                <a href="/" className="btn btn-primary btn-lg"> Home </a> &nbsp; &nbsp;
                 <button onClick={deleteHandler} className="btn btn-danger btn-lg">Delete Board </button>
-             
-
               </div>
           )
-
-
-
         }
-
-
       }
 
-
-
-       console.log(checker)
-
-       if(playerTurn == null){
+      if(playerTurn == null){
            return (
         <Fragment>
         <Container>
         <InnerContainer> 
-        <div className="text-center"> 
-        
+        <div className="text-center">         
         <div className="alert alert-danger" role="alert">
             Your Board ID  is : {BoardId}
             </div>
-
             <div className="row">
                 <div className="col-2"><HouseDeck cup > {playery} <br/>{KalahHouse[13].seeds}</HouseDeck></div>
                 <div className="col-8">
@@ -251,11 +196,9 @@ export const Games: FC = ()=> {
                     <h1 className="display-4">{playery} </h1>
                     <br/>
                 </div>
-
                 {PlayerOneBoardTwo.reverse().map((Item : any, index : any)=>{
                     return <div className="col-2" key={index}><Playdot two>{Item.seeds}</Playdot></div>
-                })}
-                
+                })}                
                 </div>
                 <br/>
                 <br/>
@@ -268,8 +211,7 @@ export const Games: FC = ()=> {
                    <Playdot onClick={()=>{ZeroCheck(Item.seeds); GameHandler(Item.gameId)}} cup>{Item.seeds}</Playdot>
                     }
                     </div>
-                })}
-                              
+                })}                              
                 <div className="text-center">
                 <br/>
                     <h1 className="display-4">{playerx}'s Turn</h1>
@@ -291,7 +233,6 @@ export const Games: FC = ()=> {
         </Container>
         </Fragment>
         )
-
        }else{
             /// PlayerOne Board
            if(playerTurn === 'PlayerOne'){
@@ -304,7 +245,6 @@ export const Games: FC = ()=> {
         <div className="alert alert-danger" role="alert">
             Your Board ID  is : {BoardId}
             </div>
-
             <div className="row">
                 <div className="col-2"><HouseDeck cup > {playery} <br/>{KalahHouse[13].seeds}</HouseDeck></div>
                 <div className="col-8">
@@ -313,12 +253,10 @@ export const Games: FC = ()=> {
                     <h1 className="display-4">{playerx} Turn </h1>
                     <br/>
                 </div>
-
                 {PlayerTwoBoard.reverse().map((Item : any, index : any)=>{
                     return <div className="col-2" key={index}>
                     {Item.seeds == 0 ? 
                     <Unplayeddot onClick={()=>{ZeroCheck(Item.seeds)}} cup>{Item.seeds}</Unplayeddot>                    
-                   
                     : 
                    <Bluedot onClick={()=>{ZeroCheck(Item.seeds); GameHandler(Item.gameId)}} >{Item.seeds}</Bluedot>
                     }
@@ -338,9 +276,7 @@ export const Games: FC = ()=> {
                     }
     
                     </div>
-                })}
-                
-              
+                })}              
                 <div className="text-center">
                 <br/>
                 
@@ -348,7 +284,6 @@ export const Games: FC = ()=> {
                 </div>
                 </div>
                 <div className="col-2 text-left"><HouseDeck>{playerx}<br/>{KalahHouse[6].seeds }</HouseDeck></div>
-                
             </div>
         </div>
         </InnerContainer>
@@ -362,8 +297,6 @@ export const Games: FC = ()=> {
         </Container>
         </Fragment>
         )
-
-
     }else{
         /// PlayerTwo Board
 

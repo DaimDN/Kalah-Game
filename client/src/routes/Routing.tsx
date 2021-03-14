@@ -4,9 +4,11 @@ import { BrowserRouter as Router, Switch, Route, Link} from "react-router-dom";
 import {Home} from '../pages/Home'
 import {Navbar} from '../components/Navbar'
 import {Games} from '../pages/Game'
-import {Errors} from '../components/Error'
 import {GameList} from '../pages/AllGames'
-
+import {Provider} from 'react-redux';
+import store from '../store';
+import loadUser from '../reducers/Auth';
+import {setToken} from '../util/setToken';
 
 export const Routing: FC = ()=> {
   const [path, setPath] : any = useState(undefined);
@@ -21,16 +23,14 @@ export const Routing: FC = ()=> {
           
       } catch (error) {    
         setPath("*")     
-          throw error;        
-                    
+          throw error;          
       }
   }
 
-  
   useEffect(()=>{
-      fetch();  
-      
+      fetch();        
 }, []);
+
 if(!serverStatus){
   return(   
     <Fragment> 
@@ -42,6 +42,7 @@ if(!serverStatus){
 }
 else{
   return (
+    <Provider store={store}>
     <Router>
     <Fragment>
       <Navbar/>                
@@ -53,7 +54,8 @@ else{
         <Route  path={path} component={DefaultRoute} />           
       </Switch>
     </Fragment>
-  </Router>    
+  </Router>  
+  </Provider>  
 )
 }  }   
 const DefaultRoute = ()=> {
