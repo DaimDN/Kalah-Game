@@ -1,30 +1,34 @@
-import React from 'react';
+import React, {FC, Fragment} from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Ellipsis } from 'react-css-spinners'
+import {Grid} from 'react-css-spinners'
+import styled from 'styled-components'
 
-
-interface PrivateRoutedInterface {
-    component: string;
+interface PrivateRoutedInterface {  
+    exact: true;
+    path: String;  
+    component: any;
     auth: {
-        isAutheticated : any ;
+        isAuthenticated : boolean,
         loading: any; 
-    }, 
-    rest: {
-
     }
 }
-
-const PrivateRoute : PrivateRoutedInterface = ({
-     component:  Component ,
-     auth: { isAuthenticated , loading }
-     ,...rest
-  }) => (
+const PrivateRoute  = ({
+  exact: exact,
+  path: path,
+  component:  Component ,
+  auth: { isAuthenticated , loading }
+  ,...rest
+}:  PrivateRoutedInterface
+) => (
     <Route
       {...rest}
       render={props =>
         loading ? (
-          <Ellipsis color="#ffdf00" size={40} />
+          <InnerIntelopeCycleon>
+            <SpinnerFragment/>
+          </InnerIntelopeCycleon>
+         
         ) : isAuthenticated ? (
           <Component {...props} />
         ) : (
@@ -32,12 +36,22 @@ const PrivateRoute : PrivateRoutedInterface = ({
         )
       }
     />
-  );
-
+  );  
   const mapStateToProps = (state : any )=> ({
     auth: state.auth
   });
-  
+  const SpinnerFragment: FC = ()=>{
+    return(
+        <Fragment>
+             <Grid color="black"  size={140}/>
+        </Fragment>
+    )
+  }
+  const InnerIntelopeCycleon = styled.div `
+  margin: auto;
+  text-align: center;
+  margin-top: 20vh;
+  `
   export default connect(mapStateToProps)(PrivateRoute);
 
 

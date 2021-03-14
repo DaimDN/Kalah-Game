@@ -7,6 +7,7 @@ import {Games} from '../pages/Game'
 import {GameList} from '../pages/AllGames'
 import {Provider} from 'react-redux';
 import store from '../store';
+import Private from './Private'
 import loadUser from '../reducers/Auth';
 import {setToken} from '../util/setToken';
 
@@ -50,8 +51,9 @@ else{
         <Route exact path="/" component={Home}/>
         <Route path="/start" component={Games}/>
         <Route path="/games/:id" component={Games} />
-        <Route path="/games" component={GameList}/>        
-        <Route  path={path} component={DefaultRoute} />           
+        <Route path="/games" component={GameList}/> 
+        <Private exact path="/daim" component={DefaultRoute} /> 
+        <Route   path={path} component={DefaultRoute} />           
       </Switch>
     </Fragment>
   </Router>  
