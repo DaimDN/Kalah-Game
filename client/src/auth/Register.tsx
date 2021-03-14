@@ -30,13 +30,18 @@ export const RegisterationController : FC = () => {
           var RegisterPayload = {firstname, lastname, email, password};
           let RegisterDone = await api.post('/register', RegisterPayload);
           const Response = RegisterDone.data;
+          console.log(Response);
+
           if(Response.error){
               setAlert(Response.error);
               setTimeout(function(){ setAlert("")}, 1000);
           }
+          else{
+                alert("Successfully Registered");
+          History.push("/login"); 
+          }
 
-          alert("Successfully Registered");
-          History.push("/login");        
+                 
       }
     }; 
   
