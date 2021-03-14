@@ -4,9 +4,9 @@ import React, {
      useState, Fragment 
     } from 'react'
 import {Redirect, Link} from 'react-router-dom'
-import { connect } from 'react-redux';
 import {LoginHandler} from '../action/Auth';
 import styled from 'styled-components'
+import { connect } from 'react-redux';
 
 interface LoginControllerPropsInterface  {
     login: any;
@@ -24,7 +24,8 @@ export const LoginController: any  = (
 
     const onSubmit = (e : any)=> {
         e.preventDefault();
-        LoginHandler(email, password);
+        var payload = {email, password};
+       LoginHandler(payload);
     };
     if (isAuthenticated) {
         return <Redirect to="/Game" />;
@@ -32,7 +33,7 @@ export const LoginController: any  = (
     return (
         <Fragment>
             <div className="mx-auto text-center">
-          <h1 className=" display-2 text-primary">Cycleon Kalah Game</h1>
+          <h1 className=" display-2 text-primary">Cycleon's Game</h1>
           <p className="lead">
             <i className="fas fa-user" /> Account Access
           </p>
@@ -72,15 +73,16 @@ export const LoginController: any  = (
         </Fragment>
       );
     };   
-const mapStateToProps = (state: any) => ({
-    isAuthenticated: state.auth.isAuthenticated
-  });
+
 
 const InnerLoginContainer = styled.div`
 width: 40%;
 margin: auto;
-
-
 `
+
+const mapStateToProps = (state: any) => ({
+  isAuthenticated: state.auth.isAuthenticated
+});
+
 
 export default connect(mapStateToProps, { LoginHandler })(LoginController);

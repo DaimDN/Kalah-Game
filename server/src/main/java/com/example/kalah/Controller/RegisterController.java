@@ -24,7 +24,7 @@ public class RegisterController {
 
 
 
-    @CrossOrigin("http://localhost:5000")
+    @CrossOrigin("http://localhost:3000")
     @ResponseStatus(HttpStatus.OK)
     @PostMapping(path = "/register", consumes = "application/json", produces = "application/json")
     user USER(@RequestBody user USER){

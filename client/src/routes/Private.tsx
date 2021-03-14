@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import {Grid} from 'react-css-spinners'
 import styled from 'styled-components'
 
-interface PrivateRoutedInterface {  
+interface PrivateRoutedCycleonInterface {  
     exact: true;
     path: String;  
     component: any;
@@ -19,7 +19,7 @@ const PrivateRoute  = ({
   component:  Component ,
   auth: { isAuthenticated , loading }
   ,...rest
-}:  PrivateRoutedInterface
+}:  PrivateRoutedCycleonInterface
 ) => (
     <Route
       {...rest}

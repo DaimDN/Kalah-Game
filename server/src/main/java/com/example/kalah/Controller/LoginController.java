@@ -22,7 +22,7 @@ public class LoginController {
     private PasswordEncoder passwordEncoder;
 
 
-    @CrossOrigin("http://localhost:5000")
+    @CrossOrigin("http://localhost:3000")
     @PostMapping(path = "/login", consumes = "application/json", produces = "application/json")
      Object login(@RequestBody Login login){
         String email = login.getEmail();
