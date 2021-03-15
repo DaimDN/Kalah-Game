@@ -6,86 +6,82 @@ import {
   AUTH_ERROR,
   LOGIN_SUCCESS,
   LOGIN_FAIL,
+  REGISTER_FAIL,
+  REGISTER_SUCCESS,
   LOGOUT
 } from './type';
-import {LoginController} from '../auth/Login'
-import store from '../store';
-import {setToken} from '../util/setToken'
 
 
-export const Loadinguser = async () : Promise<void> =>  {   
-    try {      
-    const res = await api.get('/authUser'); 
-    if(!res.data.error)
-    {
-      store.dispatch({
-        type: USER_LOADED, 
-        payload: res.data
-      })
-  
-      store.dispatch({
-        type: LOGIN_SUCCESS,
-        payload: true
-      })
-  
-      store.dispatch({
-        type: GET_PROFILE,
-        payload: res.data
-      })
-  
-    }
-    else{
-      store.dispatch({
-        type: USER_LOADED,
-        payload: {
-          isAuthenticated: false,
-          loading: false,
-          user: false
-        }
-      })
-    }
+export const loadUser : any = () => async (dispatch: any)   => {
+  try {
+    const res = await api.get('/authUser');
     
-    } catch (error) {
-      store.dispatch({
-        type: LOGIN_FAIL
-      })
-      
+
+    if(res.data.error){
+      dispatch({
+        type: AUTH_ERROR
+      });
+
+    }else{
+      dispatch({
+        type: USER_LOADED,
+        payload: res.data
+      });
     }
+
    
-  
-};
-
-export const LocalStorageTokenChecker = ()=>{
-  if(localStorage.getItem('token')!== null){
-    Loadinguser();
-  }
-}
-
-interface LoginHandlerInterface {
-  email: any;
-  password: any;
-}
-
-export const LoginHandler = async (payload: LoginHandlerInterface): Promise<void> =>  {
-  const body = payload;
-  const res = await api.post('/login', body);  
-  
-  if(res.data.error){
-    store.dispatch({
-      type: AUTH_ERROR,
-      payload: res.data
+  } catch (err) {
+    dispatch({
+      type: AUTH_ERROR
     });
   }
-  else{
-    
-    var GrabedToken : any = res.data.token;
-    setToken(GrabedToken); 
-    Loadinguser();
-  }
-
-
 };
 
-// Logout
-export const logout = () => ({ type: LOGOUT });
+export const Register : any = (formData: any) => async (dispatch : any )=> {
+  try {
+    const res = await api.post('/register', formData);
 
+    dispatch({
+      type: REGISTER_SUCCESS,
+      payload: res.data
+    });
+    dispatch(loadUser());
+  } catch (err) {
+    const errors = err.response.data;
+
+    if (errors) {
+      throw errors;
+    }
+
+    dispatch({
+      type: REGISTER_FAIL
+    });
+  }
+};
+
+interface LoginInterface{
+  email: any,
+  password: any
+}
+
+export const login : any = ({email, password}: LoginInterface) => async (dispatch : any) => {
+  const body = { email, password };
+
+  try {
+    const res = await api.post('/login', body);
+     dispatch({
+      type: LOGIN_SUCCESS,
+      payload: res.data
+    });
+
+    dispatch(loadUser());
+  } catch (err) {
+    throw err;
+
+    dispatch({
+      type: LOGIN_FAIL
+    });
+  }
+};
+
+export const logout = () => ({ type: LOGOUT });

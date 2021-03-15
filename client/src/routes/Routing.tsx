@@ -1,29 +1,26 @@
 import React, {Fragment, FC, useEffect, useState} from 'react'
 import {api} from '../util/api'
 import { BrowserRouter as Router, Switch, Route, Link} from "react-router-dom";
-import {Home} from '../pages/Home'
 import {Navbar} from '../components/Navbar'
 import {Games} from '../pages/Game'
 import {GameList} from '../pages/AllGames'
 import {Provider} from 'react-redux';
 import store from '../store';
-import loadUser from '../reducers/Auth';
-import {setToken} from '../util/setToken';
-import {LoginController} from '../auth/Login'
-import {RegisterationController} from '../auth/Register'
+import Private from '../routes/Private'
+import Login from '../auth/Login';
+import Register from '../auth/Register'
+import Home from '../pages/Home/Home'
 
 
 export const Routing: FC = ()=> {
   const [path, setPath] : any = useState(undefined);
   const [serverStatus, setServerStatus] = useState<boolean>(false);
-
   const fetch =  async (): Promise<void> =>{
       try {
           let fetch = await api.get('/default')
          setServerStatus(true)
           fetch = fetch.data;  
-          setPath(fetch)
-          
+          setPath(fetch)          
       } catch (error) {    
         setPath("*")     
           throw error;          
@@ -48,14 +45,16 @@ else{
     <Provider store={store}>
     <Router>
     <Fragment>
-      <Navbar/>                
-      <Switch>
-        <Route  path="/home" component={Home}/>
-        <Route exact path="/" component={LoginController}/>
-        <Route path="/register" component={RegisterationController}/>
-        <Route path="/start" component={Games}/>
-        <Route path="/games/:id" component={Games} />
-        <Route path="/games" component={GameList}/> 
+      <Navbar/>           
+      <Switch>        
+        <Route exact path="/login" component={Login}/>
+        <Route path="/register" component={Register}/>
+        <Private exact path="/start" component={Games}/>
+        <Private exact path="/home" component={Home}/>
+        <Route exact path="/" component={Login}/>
+        <Private exact  path="/private" component={GameList} />
+        <Private exact path="/games/:id" component={Games} />
+        <Private exact path="/games" component={GameList}/> 
         <Route  exact path={path} component={DefaultRoute} />           
       </Switch>
     </Fragment>

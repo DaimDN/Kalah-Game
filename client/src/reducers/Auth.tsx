@@ -6,12 +6,13 @@ import {
     LOGOUT
   } from '../action/type';
 
-  const initialState : any = {
+  const initialState = {
     token: localStorage.getItem('token'),
     isAuthenticated: null,
     loading: true,
     user: null
   };
+
 
   export default function (state = initialState, action : any) {
     const { type, payload } = action;
@@ -38,6 +39,13 @@ import {
             loading: false
           };
         case AUTH_ERROR:
+          return {
+            ...state,
+            ...payload,
+            isAuthenticated: false,
+            loading: false
+          };
+
         case LOGOUT:
           return {
             ...state,

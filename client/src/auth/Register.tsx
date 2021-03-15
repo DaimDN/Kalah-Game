@@ -1,10 +1,17 @@
-import React, {FC, Fragment, useState} from 'react'
-import {useHistory, Link} from 'react-router-dom'
+import React, {FC, Fragment, useState, useEffect} from 'react'
+import {Link, Redirect} from 'react-router-dom'
 import styled from 'styled-components'
 import {api} from '../util/api'
+import store from '../store';
+import { connect } from 'react-redux';
+import {Register} from '../action/Auth'
 
-export const RegisterationController : FC = () => {
 
+interface InterfaceController{
+  isAuthenticated: any;
+  register: any;
+}
+ const RegisterationController = ({ register, isAuthenticated  }: InterfaceController) => {
     const [formData, setFormData] = useState({
       firstname: '',
       lastname: '',
@@ -12,36 +19,29 @@ export const RegisterationController : FC = () => {
       password: '',
       password2: ''
     });
-
+    var [isAuth, setisAuth] = useState(false);
     const [Alert, setAlert] = useState("");
-    const History = useHistory();
-    const { firstname, lastname, email, password, password2 } = formData;
+       const { firstname, lastname, email, password, password2 } = formData;
+
+
+   
   
     const onChange = (e: any) =>
       setFormData({ ...formData, [e.target.name]: e.target.value });
   
-    const onSubmit = async (e: any) : Promise<void> => {
-      e.preventDefault();
-      if (password !== password2) {
-        setAlert("Password didn't match");
-        setTimeout(function(){ setAlert("")}, 1000);
-
-      } else {
-          var RegisterPayload = {firstname, lastname, email, password};
-          let RegisterDone = await api.post('/register', RegisterPayload);
-          const Response = RegisterDone.data;
-          console.log(Response);
-
-          if(Response.error){
-              setAlert(Response.error);
-              setTimeout(function(){ setAlert("")}, 1000);
-          }
-          else{
-                alert("Successfully Registered");
-          History.push("/login"); 
-          }     
-      }
-    }; 
+   
+  const onSubmit = async (e: any) => {
+    e.preventDefault();
+    if (password !== password2) {
+     
+    } else {
+      Register({ firstname, lastname, email, password });
+    }
+  };
+   
+  if (isAuthenticated) {
+    return <Redirect to="/" />;
+  }
   
     return (
       <Fragment>
@@ -134,9 +134,16 @@ export const RegisterationController : FC = () => {
     );
   };
 
-  
+
 
   const InnerRegisterContainer = styled.div`
 width: 40%;
 margin: auto;
 `
+
+
+const mapStateToProps = (state: any) => ({
+  isAuthenticated: state.auth.isAuthenticated
+});
+
+export default connect(mapStateToProps, {  Register})(RegisterationController);

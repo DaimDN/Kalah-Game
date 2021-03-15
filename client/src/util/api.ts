@@ -11,7 +11,7 @@ const api : any = axios.create({
 })
 api.interceptors.response.use((res : any)  => res,
     (err : any ) => {
-      if (err.response.status === 401) {      
+      if (err.response.status === 401 ) {      
         store.dispatch({ type: LOGOUT });
       }
       return Promise.reject(err);

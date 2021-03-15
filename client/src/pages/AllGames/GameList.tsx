@@ -56,22 +56,19 @@ const Dataset: FC<DefaultDataTypeValidation> = ({result})  =>{
              <div className="deck bg-secondary">
                     <div className="alert alert-warning" role="alert">
                     Board ID: <b>{item.gameId.slice(18, 24).toUpperCase()}</b>
-                    </div>
-             
+                    </div>             
                 <a href ={'games/' + item.gameId}className="btn btn-info btn-lg">JOIN BOARD</a>
              </div>    
              </div>
              </Fragment>
         })}
         </div>        
-        </Fragment>
-    )   
+        </Fragment>    )   
     }
     else{
         return (
             <Fragment></Fragment>
         )}
-
 }
 
 const InnerHeading = styled.h4 `

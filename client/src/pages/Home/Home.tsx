@@ -2,9 +2,17 @@ import React, {FC, Fragment, useState, useEffect} from 'react'
 import {api} from '../../util/api'
 import styled from 'styled-components'
 import {useHistory, Redirect} from 'react-router-dom'
-import {LocalStorageTokenChecker} from '../../action/Auth'
 import store from '../../store'
-export const Home : FC =  ()=> {
+import { connect } from 'react-redux';
+
+
+interface UserDashBoard {
+    auth : {
+        user : any
+    }
+  
+}
+const Home  =  ({ auth: {user}}: UserDashBoard)=> {
     const [data, setData] : any = useState(undefined);
     let History = useHistory();
     const [auth, setAuth] = useState(null);
@@ -20,16 +28,9 @@ export const Home : FC =  ()=> {
         }
         useEffect(()=>{
             fetch(); 
-            LocalStorageTokenChecker();  
-            store.subscribe(()=>{    
-                let allStates = store.getState();
-                let getAuth = allStates.auth.isAuthenticated;        
-                setAuth(getAuth);      
-            })
+            
+    });      
 
-    });
-
-      
 
     const Proceed = async () : Promise<void> =>{         
     var ResponseFromServer : any ;
@@ -67,6 +68,18 @@ export const Home : FC =  ()=> {
       </Container>
     )
 }
+
+
+const mapStateToProps = (state : any) => ({
+    auth: state.auth
+  });
+  
+export default connect(mapStateToProps, {})(
+    Home
+  );
+
+
+
 const Container = styled.div `
 width: 95%;
 margin: auto;
@@ -88,3 +101,4 @@ const Heading2 = styled.p `
 font-size: 27px;
 
 `
+

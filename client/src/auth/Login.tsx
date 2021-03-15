@@ -4,19 +4,18 @@ import React, {
      useState, Fragment 
     } from 'react'
 import {Redirect, Link, useHistory} from 'react-router-dom'
-import {LoginHandler} from '../action/Auth'
+import {login} from '../action/Auth'
 import styled from 'styled-components'
-import { connect } from 'react-redux';
 import store from '../store';
-import {LocalStorageTokenChecker} from '../action/Auth'
+import { connect } from 'react-redux';
 
 interface LoginControllerPropsInterface  {
   login: any;
-  isAuthenticated : boolean;
+  isAuthenticated : any;
 }
-
-export const LoginController: any  = (
-       { login, isAuthenticated } :  
+ const LoginController: any  = (
+       { login,
+         isAuthenticated } :  
        LoginControllerPropsInterface
     ) => {
     const [formData, setFormData] = useState({ email: '', password: '' });
@@ -24,30 +23,21 @@ export const LoginController: any  = (
     const onChange = (e : any) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
-    var [isAuth, setisAuth] = useState(false);
 
     const onSubmit = (e : any)=> {
         e.preventDefault();
         var payload = {email, password};
-       LoginHandler(payload);
+       login(payload);
     };
-    let Redirect = useHistory();
 
-    useEffect(()=>{  
-      LocalStorageTokenChecker();  
-      store.subscribe(()=>{    
-        let allStates = store.getState();
-        let getAuth = allStates.auth.isAuthenticated;        
-        setisAuth(getAuth);      
-      })
-    }, [isAuth])    
-    if(isAuth){
-      Redirect.push('/home');           
+    if (isAuthenticated) {
+      return <Redirect to="/home" />;
     }
     
     return (
         <Fragment>
             <div className="mx-auto text-center">
+             
           <h1 className=" display-2 text-primary">Cycleon's Game</h1>
           <p className="lead">
             <i className="fas fa-user" /> Account Access
@@ -89,6 +79,11 @@ export const LoginController: any  = (
       );
     };   
 
+    const mapStateToProps = (state : any) => ({
+      isAuthenticated: state.auth.isAuthenticated
+    });
+    
+    export default connect(mapStateToProps, {login })(LoginController);
     
 
 const InnerLoginContainer = styled.div`

@@ -5,8 +5,13 @@ import {
   useParams
 } from "react-router-dom";
 import {api} from '../../util/api'
+import { connect } from 'react-redux';
 
-export const Games: FC = ()=> {
+interface GameUserDashBoard {
+    auth : any
+}
+
+export const Games = ({ auth: any }: GameUserDashBoard)=> {
     var params = useParams();
     let History = useHistory();
     var [gameBoard, setgameBoard] = useState(undefined);
@@ -377,6 +382,16 @@ export const Games: FC = ()=> {
 
     
 }
+
+
+
+const mapStateToProps = (state : any) => ({
+    auth: state.auth
+  });
+  
+  export default connect(mapStateToProps, {})(
+    Games
+  );
 
 
 const HouseDeck: any  =  styled.div <{cup: boolean}>`
