@@ -1,7 +1,7 @@
 import React, {Fragment, FC, useEffect, useState} from 'react'
 import {api} from '../util/api'
 import { BrowserRouter as Router, Switch, Route, Link} from "react-router-dom";
-import {Navbar} from '../components/Navbar'
+import Navbar from '../components/Navbar'
 import {Games} from '../pages/Game'
 import {GameList} from '../pages/AllGames'
 import {Provider} from 'react-redux';

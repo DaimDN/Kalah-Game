@@ -2,15 +2,17 @@ import React, {FC, Fragment} from 'react'
 import { NavLink } from 'react-router-dom'
 import styled from 'styled-components'
 import {logout} from '../action/Auth'
+import { connect } from 'react-redux';
 
 
-interface NavBoard {
-    auth: {
-        isAuthenticated : any
+interface UserDashBoard {
+    auth : {
+        user : any
     }
+  
 }
 
- export const Navbar=  ({ auth: { isAuthenticated  } }: NavBoard): any=> {
+ export const Navbar =  ({ auth: {user}}: UserDashBoard) => {
     return (
         <Fragment>
             <div className="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
@@ -20,19 +22,27 @@ interface NavBoard {
             <a className="p-2 text-dark" href="#">Cycleon</a>
             <a className="p-2 text-dark" href="/games">ALL GAMES</a>
             </nav>
-            {isAuthenticated ? 
+            {user ? 
             <div>
                 <a onClick={()=>{localStorage.removeItem('token'); window.location.reload()}} href="#!" className="btn btn-primary" >LOGOUT</a>
             </div> : 
             <div>
             <a  href="/" className="btn btn-primary" >LOGIN</a>    
-            </div>}            
+            </div>}   
     
             </div>
             
         </Fragment>
     )
 }
+
+const mapStateToProps = (state : any) => ({
+    auth: state.auth
+  });
+  
+export default connect(mapStateToProps, {})(
+    Navbar
+  );
 
 
 
