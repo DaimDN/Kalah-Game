@@ -8,7 +8,7 @@ import {Provider} from 'react-redux';
 import store from '../store';
 import Private from '../routes/Private'
 import Login from '../auth/Login';
-import Register from '../auth/Register'
+import {RegisterationController} from '../auth/Register'
 import Home from '../pages/Home/Home'
 
 
@@ -48,7 +48,7 @@ else{
       <Navbar/>           
       <Switch>        
         <Route exact path="/login" component={Login}/>
-        <Route path="/register" component={Register}/>
+        <Route path="/register" component={RegisterationController}/>
         <Private exact path="/start" component={Games}/>
         <Private exact path="/home" component={Home}/>
         <Route exact path="/" component={Login}/>

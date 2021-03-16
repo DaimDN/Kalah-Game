@@ -31,7 +31,6 @@ public class RegisterController {
 
 
     @CrossOrigin("http://localhost:3000")
-    @ResponseStatus(HttpStatus.OK)
     @PostMapping(path = "/register", consumes = "application/json", produces = "application/json")
     public ResponseEntity<?> USER(@RequestBody user USER){
        user founduser =  userRespository.findByEmail(USER.getEmail());

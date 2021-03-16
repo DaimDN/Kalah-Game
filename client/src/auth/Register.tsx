@@ -11,7 +11,7 @@ interface InterfaceController{
   isAuthenticated: any;
   register: any;
 }
- const RegisterationController = ({ register, isAuthenticated  }: InterfaceController) => {
+ export const RegisterationController = ({ register, isAuthenticated  }: InterfaceController) => {
     const [formData, setFormData] = useState({
       firstname: '',
       lastname: '',
@@ -33,9 +33,12 @@ interface InterfaceController{
   const onSubmit = async (e: any) => {
     e.preventDefault();
     if (password !== password2) {
+      setAlert("Please make sure your password match")
      
     } else {
       Register({ firstname, lastname, email, password });
+     // alert("Successfully Registered");
+     // window.location.reload();
     }
   };
    
@@ -141,9 +144,3 @@ width: 40%;
 margin: auto;
 `
 
-
-const mapStateToProps = (state: any) => ({
-  isAuthenticated: state.auth.isAuthenticated
-});
-
-export default connect(mapStateToProps, {  Register})(RegisterationController);

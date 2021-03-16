@@ -37,26 +37,35 @@ export const loadUser : any = () => async (dispatch: any)   => {
   }
 };
 
-export const Register : any = (formData: any) => async (dispatch : any )=> {
+interface RegisterPanel {
+  firstname: any,
+  lastname: any,
+  email: any,
+  password: any
+}
+
+export const Register = async ({firstname, lastname, email, password}: RegisterPanel): Promise<void>=>{
+ 
+  const formData =  {firstname, lastname, email, password};  
   try {
     const res = await api.post('/register', formData);
-
-    dispatch({
-      type: REGISTER_SUCCESS,
-      payload: res.data
-    });
-    dispatch(loadUser());
-  } catch (err) {
-    const errors = err.response.data;
-
-    if (errors) {
-      throw errors;
+    if(res.status === 200){
+      alert("Successfully Registered");
+      window.location.href = '/';
     }
-
-    dispatch({
-      type: REGISTER_FAIL
-    });
+    else{
+      window.location.href = "/register"
+    }
+    if(res.error){
+      console.log("true")
+    }
+    
+  } catch (error) {
+    throw error;
+    
   }
+ 
+
 };
 
 interface LoginInterface{
