@@ -28,7 +28,6 @@ const Home  =  ({ auth: {user}}: UserDashBoard)=> {
         }
         useEffect(()=>{
             fetch(); 
-            
     });      
 
 
@@ -55,9 +54,7 @@ const Home  =  ({ auth: {user}}: UserDashBoard)=> {
                 <ListItem>If the last sown seed lands in an empty house owned by the player, and the opposite house contains seeds, both the last seed and the opposite seeds are captured and placed into the player's store.</ListItem>
                 <ListItem>If the last sown seed lands in the player's store, the player gets an additional move. There is no limit on the number of moves a player can make in their turn.</ListItem>
                 <ListItem>When one player no longer has any seeds in any of their houses, the game ends. The other player moves all remaining seeds to their store, and the player with the most seeds in their store wins.</ListItem>
-            </OrderList>           
-
-
+            </OrderList>        
             <button onClick={Proceed} className="btn btn-primary btn-lg">Start</button>
             </Fragment> 
             : 

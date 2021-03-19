@@ -9,7 +9,8 @@ public enum PlayerTurns {
 
     private String whoseTurn;
 
-    PlayerTurns(String a) {
+    PlayerTurns(String whoseTurn) {
+        this.whoseTurn = whoseTurn;
     }
 
     public String getWhoseTurn() {

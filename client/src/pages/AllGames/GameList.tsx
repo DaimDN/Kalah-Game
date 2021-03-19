@@ -17,6 +17,7 @@ export const GameList : FC = ()=> {
                 throw error;                             
             }
         }
+        
     useEffect(()=>{
         fetch();
     },[])

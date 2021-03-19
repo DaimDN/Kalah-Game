@@ -61,11 +61,8 @@ export const Register = async ({firstname, lastname, email, password}: RegisterP
     }
     
   } catch (error) {
-    throw error;
-    
+    throw error;        
   }
- 
-
 };
 
 interface LoginInterface{

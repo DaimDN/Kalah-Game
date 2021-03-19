@@ -404,8 +404,6 @@ color: white;
 font-size: 22px;
 text-align: center;
 padding-top: 23px;
-
-
 `
 const Unplayeddot: any  =  styled.div <{cup: boolean}>`
 height: 14vh;
@@ -416,7 +414,6 @@ color: white;
 font-size: 22px;
 text-align: center;
 padding-top: 23px;
-
 `
 
 
@@ -430,7 +427,6 @@ color: white;
 font-size: 22px;
 text-align: center;
 padding-top: 23px;
-
 `
 
 const Bluedot: any  =  styled.div <{cup: boolean}>`
@@ -500,7 +496,6 @@ ${props => props.cup && css`
 const InnerContainer = styled.div `
 width: 80%;
 margin: auto;
-
 `
 
 const Container = styled.div `
@@ -510,5 +505,4 @@ margin: auto;
 const Heading = styled.h1 `
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 font-family: 'Poppins', sans-serif;
-
 `
